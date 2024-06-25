@@ -29,4 +29,12 @@ export class OpenCloseAnimator extends Component {
         await delay(this.closeDuration * 1000);
         this.node.active = false;
     }
+
+    public onOpenAnimationFinish() {
+
+    }
+
+    public onCloseAnimationFinish() {
+
+    }
 }

@@ -19,8 +19,23 @@
       }
     ],
     "_exoticAnimation": null,
-    "_events": [],
-    "_embeddedPlayers": []
+    "_events": [
+      {
+        "frame": 1,
+        "func": "",
+        "params": []
+      },
+      {
+        "frame": 1,
+        "func": "onCloseAnimationFinish",
+        "params": []
+      }
+    ],
+    "_embeddedPlayers": [],
+    "_additiveSettings": {
+      "__id__": 12
+    },
+    "_auxiliaryCurveEntries": []
   },
   {
     "__type__": "cc.animation.ColorTrack",
@@ -28,7 +43,8 @@
       "__type__": "cc.animation.TrackBinding",
       "path": {
         "__id__": 2
-      }
+      },
+      "proxy": null
     },
     "_channels": [
       {
@@ -237,5 +253,10 @@
     ],
     "preExtrapolation": 1,
     "postExtrapolation": 1
+  },
+  {
+    "__type__": "cc.AnimationClipAdditiveSettings",
+    "enabled": false,
+    "refClip": null
   }
 ]
