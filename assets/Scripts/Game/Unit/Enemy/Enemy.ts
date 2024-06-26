@@ -116,12 +116,14 @@ export class Enemy extends Component {
         newPosition.x += move.x * this.speedX * deltaTime;
         newPosition.y += move.y * this.speedY * deltaTime;
 
+        // 敌人往左右移动的时候把敌人的图片左右镜像
         if (move.x < 0) {
             this.sprite.node.setScale(-1, 1, 1);
         } else if (0 < move.x) {
             this.sprite.node.setScale(1, 1, 1);
         }
 
+        // 设置敌人在新的世界坐标位置, 因为上面的代码是获得的敌人的世界坐标位置进行更新操作
         this.node.setWorldPosition(newPosition);
 
         if (0 < this.lifetimeLeft) {
@@ -139,6 +141,7 @@ export class Enemy extends Component {
 
         this.endOfLifetimeTriggered = true;
 
+        // 模拟一个敌人的闪烁动画效果, 每隔200ms消失, 然后再显示再间隔200ms
         while (this.node?.active) {
             this.sprite.node.active = false;
             await delay(200);
