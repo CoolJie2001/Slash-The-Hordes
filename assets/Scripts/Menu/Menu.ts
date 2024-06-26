@@ -69,8 +69,13 @@ export class Menu extends Component {
     }
 
     private startGame(): void {
-        AppRoot.Instance.ScreenFader.playOpen();
-        GameRunner.Instance.playGame();
+        AppRoot.Instance.ScreenFader.playOpen()
+            .then(value => {
+                console.log('游戏启动Open动画播放完成.')
+                GameRunner.Instance.playGame();
+            });
+
+        // GameRunner.Instance.playGame();
     }
 
     private async openUpgradesWindow(): Promise<void> {
