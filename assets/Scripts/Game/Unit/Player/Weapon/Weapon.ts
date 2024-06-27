@@ -1,9 +1,10 @@
-import { Animation, AnimationState, Component, _decorator } from "cc";
+import { Animation, AnimationState, Component, Node, _decorator } from "cc";
 import { ISignal } from "../../../../Services/EventSystem/ISignal";
 import { Signal } from "../../../../Services/EventSystem/Signal";
 import { GameTimer } from "../../../../Services/GameTimer";
 
 import { UpgradableCollider } from "./UpgradableCollider";
+import { Player } from "../Player";
 const { ccclass, property } = _decorator;
 
 @ccclass("Weapon")
@@ -11,13 +12,19 @@ export class Weapon extends Component {
     @property(Animation) private weaponAnimation: Animation;
     @property(UpgradableCollider) private upgradableCollider: UpgradableCollider;
 
+    @property(Node)
+    private weaponNode: Node;
+
     private weaponStrikeEvent = new Signal<Weapon>();
 
     private strikeTimer: GameTimer;
     private strikeState: AnimationState;
     private damage: number;
 
-    public init(strikeDelay: number, damage: number): void {
+    private player: Player;
+
+
+    public init(strikeDelay: number, damage: number, player: Player): void {
         this.strikeTimer = new GameTimer(strikeDelay);
         this.damage = damage;
         this.node.active = false;
@@ -27,11 +34,16 @@ export class Weapon extends Component {
         this.strikeState.speed = 1;
 
         this.upgradableCollider.init();
+
+        this.player = player;
     }
 
     public gameTick(deltaTime: number): void {
         this.strikeTimer.gameTick(deltaTime);
         if (this.strikeTimer.tryFinishPeriod()) {
+            this.weaponNode.angle = this.player.CurrentForward;
+            console.log(this.weaponNode.angle);
+
             this.strike();
         }
     }
@@ -57,6 +69,7 @@ export class Weapon extends Component {
 
     private strike(): void {
         this.node.active = true;
+        console.log(this.strikeState.name)
         this.weaponAnimation.play(this.strikeState.name);
         this.weaponStrikeEvent.trigger(this);
     }

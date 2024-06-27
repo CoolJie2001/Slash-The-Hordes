@@ -1,4 +1,4 @@
-import { Animation, Node, BoxCollider2D, Collider2D, Component, Vec2, Vec3, _decorator, Details, Sprite, Color } from "cc";
+import { Animation, Node, BoxCollider2D, Collider2D, Component, Vec2, Vec3, _decorator, Details, Sprite, Color, misc } from "cc";
 import { delay } from "../../../Services/Utils/AsyncUtils";
 import { IInput } from "../../Input/IInput";
 import { UnitHealth } from "../UnitHealth";
@@ -26,6 +26,8 @@ export class Player extends Component {
     private regeneration: PlayerRegeneration;
     private speed: number;
 
+    private dir: Vec2;
+
     private isMoveAnimationPlaying = false;
 
     public init(input: IInput, data: PlayerData): void {
@@ -35,7 +37,7 @@ export class Player extends Component {
         this.regeneration = new PlayerRegeneration(this.health, data.regenerationDelay);
         this.speed = data.speed;
 
-        this.weapon.init(data.strikeDelay, data.damage);
+        this.weapon.init(data.strikeDelay, data.damage, this);
         this.magnet.init(data.magnetDuration);
         this.health.HealthPointsChangeEvent.on(this.animateHpChange, this);
         this.playerUI.init(this.health);
@@ -63,6 +65,12 @@ export class Player extends Component {
 
     public get Collider(): Collider2D {
         return this.collider;
+    }
+
+    public get CurrentForward(): number {
+        let angleRadians = Math.atan2(this.dir.y, this.dir.x);
+
+        return misc.radiansToDegrees(angleRadians);
     }
 
     public gameTick(deltaTime: number): void {
@@ -102,6 +110,8 @@ export class Player extends Component {
                 this.animation.play("Idle");
             }
         }
+
+        this.dir = movement.normalize();
     }
 
     private async animateHpChange(hpChange: number): Promise<void> {
