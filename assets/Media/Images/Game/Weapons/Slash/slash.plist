@@ -4,57 +4,83 @@
   <dict>
     <key>frames</key>
     <dict>
-      <key>slash01.png</key>
+      <key>battleAttackSkill_190004.png</key>
       <dict>
         <key>frame</key>
-        <string>{{0,0},{18,8}}</string>
+        <string>{{0,0},{239,60}}</string>
         <key>offset</key>
-        <string>{-6,2}</string>
+        <string>{0,0}</string>
         <key>rotated</key>
         <false/>
         <key>sourceColorRect</key>
-        <string>{{1,2},{18,8}}</string>
+        <string>{{0,0},{239,60}}</string>
         <key>sourceSize</key>
-        <string>{32,16}</string>
+        <string>{239,60}</string>
       </dict>
-      <key>slash02.png</key>
+      <key>battleAttackSkill_190003.png</key>
       <dict>
         <key>frame</key>
-        <string>{{18,0},{14,9}}</string>
+        <string>{{239,0},{226,63}}</string>
         <key>offset</key>
-        <string>{-2,1.5}</string>
+        <string>{0,0}</string>
         <key>rotated</key>
         <false/>
         <key>sourceColorRect</key>
-        <string>{{7,2},{14,9}}</string>
+        <string>{{0,0},{226,63}}</string>
         <key>sourceSize</key>
-        <string>{32,16}</string>
+        <string>{226,63}</string>
       </dict>
-      <key>slash03.png</key>
+      <key>battleAttackSkill_190002.png</key>
       <dict>
         <key>frame</key>
-        <string>{{0,8},{10,6}}</string>
+        <string>{{0,60},{221,60}}</string>
         <key>offset</key>
-        <string>{1,1}</string>
+        <string>{0,0}</string>
         <key>rotated</key>
         <false/>
         <key>sourceColorRect</key>
-        <string>{{12,4},{10,6}}</string>
+        <string>{{0,0},{221,60}}</string>
         <key>sourceSize</key>
-        <string>{32,16}</string>
+        <string>{221,60}</string>
       </dict>
-      <key>slash04.png</key>
+      <key>battleAttackSkill_190005.png</key>
       <dict>
         <key>frame</key>
-        <string>{{10,8},{4,3}}</string>
+        <string>{{465,0},{184,39}}</string>
         <key>offset</key>
-        <string>{4,0.5}</string>
+        <string>{0,0}</string>
         <key>rotated</key>
         <false/>
         <key>sourceColorRect</key>
-        <string>{{18,6},{4,3}}</string>
+        <string>{{0,0},{184,39}}</string>
         <key>sourceSize</key>
-        <string>{32,16}</string>
+        <string>{184,39}</string>
+      </dict>
+      <key>battleAttackSkill_190001.png</key>
+      <dict>
+        <key>frame</key>
+        <string>{{649,0},{173,63}}</string>
+        <key>offset</key>
+        <string>{0,0}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{0,0},{173,63}}</string>
+        <key>sourceSize</key>
+        <string>{173,63}</string>
+      </dict>
+      <key>battleAttackSkill_190006.png</key>
+      <dict>
+        <key>frame</key>
+        <string>{{465,39},{109,31}}</string>
+        <key>offset</key>
+        <string>{0,0}</string>
+        <key>rotated</key>
+        <false/>
+        <key>sourceColorRect</key>
+        <string>{{0,0},{109,31}}</string>
+        <key>sourceSize</key>
+        <string>{109,31}</string>
       </dict>
     </dict>
     <key>metadata</key>
@@ -68,7 +94,7 @@
       <key>realTextureFileName</key>
       <string>slash.png</string>
       <key>size</key>
-      <string>{32,14}</string>
+      <string>{822,120}</string>
       <key>textureFileName</key>
       <string>slash</string>
     </dict>

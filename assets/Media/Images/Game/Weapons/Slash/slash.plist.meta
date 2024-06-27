@@ -2,29 +2,29 @@
   "ver": "1.0.8",
   "importer": "sprite-atlas",
   "imported": true,
-  "uuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a",
+  "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e",
   "files": [
     ".json"
   ],
   "subMetas": {
-    "07c2d": {
+    "e36cf": {
       "importer": "sprite-frame",
-      "uuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a@07c2d",
+      "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e@e36cf",
       "displayName": "",
-      "id": "07c2d",
-      "name": "slash01",
+      "id": "e36cf",
+      "name": "battleAttackSkill_190004",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -6,
-        "offsetY": 2,
+        "offsetX": 0,
+        "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 18,
-        "height": 8,
-        "rawWidth": 32,
-        "rawHeight": 16,
+        "width": 239,
+        "height": 60,
+        "rawWidth": 239,
+        "rawHeight": 60,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -43,8 +43,8 @@
           "maxPos": []
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "7cb8b0cb-aa0d-4e08-bf01-8ab07b992e6f@6c48a",
-        "atlasUuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a"
+        "imageUuidOrDatabaseUri": "e4988c2d-57a1-4df3-a791-5569c4b1341f@6c48a",
+        "atlasUuid": "4e8db122-00d0-4a54-beda-bee46b04d62e"
       },
       "ver": "1.0.12",
       "imported": true,
@@ -53,24 +53,24 @@
       ],
       "subMetas": {}
     },
-    "d1236": {
+    "a591c": {
       "importer": "sprite-frame",
-      "uuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a@d1236",
+      "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e@a591c",
       "displayName": "",
-      "id": "d1236",
-      "name": "slash02",
+      "id": "a591c",
+      "name": "battleAttackSkill_190003",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": -2,
-        "offsetY": 1.5,
-        "trimX": 18,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 239,
         "trimY": 0,
-        "width": 14,
-        "height": 9,
-        "rawWidth": 32,
-        "rawHeight": 16,
+        "width": 226,
+        "height": 63,
+        "rawWidth": 226,
+        "rawHeight": 63,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -89,8 +89,8 @@
           "maxPos": []
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "7cb8b0cb-aa0d-4e08-bf01-8ab07b992e6f@6c48a",
-        "atlasUuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a"
+        "imageUuidOrDatabaseUri": "e4988c2d-57a1-4df3-a791-5569c4b1341f@6c48a",
+        "atlasUuid": "4e8db122-00d0-4a54-beda-bee46b04d62e"
       },
       "ver": "1.0.12",
       "imported": true,
@@ -99,24 +99,24 @@
       ],
       "subMetas": {}
     },
-    "c3ac3": {
+    "21a3c": {
       "importer": "sprite-frame",
-      "uuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a@c3ac3",
+      "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e@21a3c",
       "displayName": "",
-      "id": "c3ac3",
-      "name": "slash03",
+      "id": "21a3c",
+      "name": "battleAttackSkill_190002",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 1,
-        "offsetY": 1,
+        "offsetX": 0,
+        "offsetY": 0,
         "trimX": 0,
-        "trimY": 8,
-        "width": 10,
-        "height": 6,
-        "rawWidth": 32,
-        "rawHeight": 16,
+        "trimY": 60,
+        "width": 221,
+        "height": 60,
+        "rawWidth": 221,
+        "rawHeight": 60,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -135,8 +135,8 @@
           "maxPos": []
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "7cb8b0cb-aa0d-4e08-bf01-8ab07b992e6f@6c48a",
-        "atlasUuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a"
+        "imageUuidOrDatabaseUri": "e4988c2d-57a1-4df3-a791-5569c4b1341f@6c48a",
+        "atlasUuid": "4e8db122-00d0-4a54-beda-bee46b04d62e"
       },
       "ver": "1.0.12",
       "imported": true,
@@ -145,24 +145,24 @@
       ],
       "subMetas": {}
     },
-    "27b67": {
+    "36b21": {
       "importer": "sprite-frame",
-      "uuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a@27b67",
+      "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e@36b21",
       "displayName": "",
-      "id": "27b67",
-      "name": "slash04",
+      "id": "36b21",
+      "name": "battleAttackSkill_190005",
       "userData": {
         "trimType": "auto",
         "trimThreshold": 1,
         "rotated": false,
-        "offsetX": 4,
-        "offsetY": 0.5,
-        "trimX": 10,
-        "trimY": 8,
-        "width": 4,
-        "height": 3,
-        "rawWidth": 32,
-        "rawHeight": 16,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 465,
+        "trimY": 0,
+        "width": 184,
+        "height": 39,
+        "rawWidth": 184,
+        "rawHeight": 39,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -181,8 +181,100 @@
           "maxPos": []
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "7cb8b0cb-aa0d-4e08-bf01-8ab07b992e6f@6c48a",
-        "atlasUuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a"
+        "imageUuidOrDatabaseUri": "e4988c2d-57a1-4df3-a791-5569c4b1341f@6c48a",
+        "atlasUuid": "4e8db122-00d0-4a54-beda-bee46b04d62e"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "f148f": {
+      "importer": "sprite-frame",
+      "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e@f148f",
+      "displayName": "",
+      "id": "f148f",
+      "name": "battleAttackSkill_190001",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 649,
+        "trimY": 0,
+        "width": 173,
+        "height": 63,
+        "rawWidth": 173,
+        "rawHeight": 63,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [],
+          "indexes": [],
+          "uv": [],
+          "nuv": [],
+          "minPos": [],
+          "maxPos": []
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e4988c2d-57a1-4df3-a791-5569c4b1341f@6c48a",
+        "atlasUuid": "4e8db122-00d0-4a54-beda-bee46b04d62e"
+      },
+      "ver": "1.0.12",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "67b81": {
+      "importer": "sprite-frame",
+      "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e@67b81",
+      "displayName": "",
+      "id": "67b81",
+      "name": "battleAttackSkill_190006",
+      "userData": {
+        "trimType": "auto",
+        "trimThreshold": 1,
+        "rotated": false,
+        "offsetX": 0,
+        "offsetY": 0,
+        "trimX": 465,
+        "trimY": 39,
+        "width": 109,
+        "height": 31,
+        "rawWidth": 109,
+        "rawHeight": 31,
+        "borderTop": 0,
+        "borderBottom": 0,
+        "borderLeft": 0,
+        "borderRight": 0,
+        "packable": true,
+        "pixelsToUnit": 100,
+        "pivotX": 0.5,
+        "pivotY": 0.5,
+        "meshType": 0,
+        "vertices": {
+          "rawPosition": [],
+          "indexes": [],
+          "uv": [],
+          "nuv": [],
+          "minPos": [],
+          "maxPos": []
+        },
+        "isUuid": true,
+        "imageUuidOrDatabaseUri": "e4988c2d-57a1-4df3-a791-5569c4b1341f@6c48a",
+        "atlasUuid": "4e8db122-00d0-4a54-beda-bee46b04d62e"
       },
       "ver": "1.0.12",
       "imported": true,
@@ -195,7 +287,7 @@
   "userData": {
     "atlasTextureName": "slash.png",
     "format": 2,
-    "uuid": "35b42b00-ee3e-4708-b2cf-dfb136ae206a",
-    "textureUuid": "7cb8b0cb-aa0d-4e08-bf01-8ab07b992e6f@6c48a"
+    "uuid": "4e8db122-00d0-4a54-beda-bee46b04d62e",
+    "textureUuid": "e4988c2d-57a1-4df3-a791-5569c4b1341f@6c48a"
   }
 }
