@@ -26,7 +26,7 @@
     "collisionDelay": 0.5,
     "magnetDuration": 6,
     "weapon": {
-      "strikeDelay": 2,
+      "strikeDelay": 0.5,
       "damage": 2
     },
     "haloLauncher": {

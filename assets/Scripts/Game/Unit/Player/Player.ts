@@ -67,6 +67,10 @@ export class Player extends Component {
         return this.collider;
     }
 
+    public get Direction() : Vec2 {
+        return this.dir;
+    }
+
     public get CurrentForward(): number {
         let angleRadians = Math.atan2(this.dir.y, this.dir.x);
 
@@ -85,6 +89,8 @@ export class Player extends Component {
 
         const movement: Vec2 = this.input.getAxis();
         if (!movement.equals(Vec2.ZERO)) {
+            this.dir = movement.normalize();
+
             movement.x *= deltaTime * this.speed;
             movement.y *= deltaTime * this.speed;
 
@@ -110,8 +116,6 @@ export class Player extends Component {
                 this.animation.play("Idle");
             }
         }
-
-        this.dir = movement.normalize();
     }
 
     private async animateHpChange(hpChange: number): Promise<void> {

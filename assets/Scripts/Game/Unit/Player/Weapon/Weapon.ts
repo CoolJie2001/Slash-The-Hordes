@@ -1,4 +1,4 @@
-import { Animation, AnimationState, Component, Node, _decorator } from "cc";
+import { Animation, AnimationState, Component, Node, Vec2, _decorator, v3 } from "cc";
 import { ISignal } from "../../../../Services/EventSystem/ISignal";
 import { Signal } from "../../../../Services/EventSystem/Signal";
 import { GameTimer } from "../../../../Services/GameTimer";
@@ -14,6 +14,9 @@ export class Weapon extends Component {
 
     @property(Node)
     private weaponNode: Node;
+
+    @property(Number)
+    private offsetDistance : number = 100
 
     private weaponStrikeEvent = new Signal<Weapon>();
 
@@ -31,7 +34,7 @@ export class Weapon extends Component {
 
         this.weaponAnimation.on(Animation.EventType.FINISHED, this.endStrike, this);
         this.strikeState = this.weaponAnimation.getState(this.weaponAnimation.clips[0].name);
-        this.strikeState.speed = 1;
+        this.strikeState.speed = 0.3;
 
         this.upgradableCollider.init();
 
@@ -42,7 +45,11 @@ export class Weapon extends Component {
         this.strikeTimer.gameTick(deltaTime);
         if (this.strikeTimer.tryFinishPeriod()) {
             this.weaponNode.angle = this.player.CurrentForward;
-            console.log(this.weaponNode.angle);
+            
+            let offsetX = this.offsetDistance * this.player.Direction.x
+            let offsetY = this.offsetDistance * this.player.Direction.y
+
+            this.weaponNode.setPosition(v3(offsetX, offsetY, 0))
 
             this.strike();
         }
@@ -69,7 +76,6 @@ export class Weapon extends Component {
 
     private strike(): void {
         this.node.active = true;
-        console.log(this.strikeState.name)
         this.weaponAnimation.play(this.strikeState.name);
         this.weaponStrikeEvent.trigger(this);
     }
