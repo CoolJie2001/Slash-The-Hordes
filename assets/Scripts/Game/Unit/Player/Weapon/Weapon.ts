@@ -22,14 +22,16 @@ export class Weapon extends Component {
 
     private strikeTimer: GameTimer;
     private strikeState: AnimationState;
+    private delay : number;
     private damage: number;
 
     private player: Player;
 
 
-    public init(strikeDelay: number, damage: number, player: Player): void {
+    public init(strikeDelay: number, damage: number, delay : number, player: Player): void {
         this.strikeTimer = new GameTimer(strikeDelay);
         this.damage = damage;
+        this.delay = delay;
         this.node.active = false;
 
         this.weaponAnimation.on(Animation.EventType.FINISHED, this.endStrike, this);

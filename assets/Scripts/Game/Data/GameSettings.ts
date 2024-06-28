@@ -24,6 +24,7 @@ export class PlayerSettings {
 export class WeaponSettings {
     public strikeDelay = 0;
     public damage = 0;
+    public delay = 0;
 }
 
 export class WaveLauncherSettings {

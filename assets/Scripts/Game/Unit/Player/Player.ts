@@ -37,7 +37,7 @@ export class Player extends Component {
         this.regeneration = new PlayerRegeneration(this.health, data.regenerationDelay);
         this.speed = data.speed;
 
-        this.weapon.init(data.strikeDelay, data.damage, this);
+        this.weapon.init(data.strikeDelay, data.damage, data.delay, this);
         this.magnet.init(data.magnetDuration);
         this.health.HealthPointsChangeEvent.on(this.animateHpChange, this);
         this.playerUI.init(this.health);
@@ -145,6 +145,7 @@ export class PlayerData {
     // Weapon
     public strikeDelay = 0;
     public damage = 0;
+    public delay = 0;
 
     // Magnet
     public magnetDuration = 0;

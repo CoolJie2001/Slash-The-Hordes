@@ -237,6 +237,7 @@ export class Game extends Component {
 
         playerData.damage = metaUpgrades.getUpgradeValue(MetaUpgradeType.OverallDamage) + settings.weapon.damage;
         playerData.strikeDelay = settings.weapon.strikeDelay;
+        playerData.delay = settings.weapon.delay;
 
         playerData.magnetDuration = settings.magnetDuration;
 

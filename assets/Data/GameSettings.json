@@ -27,7 +27,8 @@
     "magnetDuration": 6,
     "weapon": {
       "strikeDelay": 0.5,
-      "damage": 2
+      "damage": 2,
+      "delay" : 1.0
     },
     "haloLauncher": {
       "projectilesToSpawn": 20,
