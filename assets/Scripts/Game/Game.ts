@@ -32,6 +32,7 @@ import { WaveProjectileLauncher } from "./Projectile/ProjectileLauncher/WaveProj
 import { Upgrader } from "./Upgrades/Upgrader";
 import { MetaUpgradeType } from "./Upgrades/UpgradeType";
 import { RotatingBladeLauncher } from "./Projectile/ProjectileLauncher/RotatingBladeLauncher";
+import { SkillManager } from "./Unit/Skill/SkillManager";
 
 const { ccclass, property } = _decorator;
 
@@ -56,6 +57,8 @@ export class Game extends Component {
     @property(GameAudioAdapter) private gameAudioAdapter: GameAudioAdapter;
     @property(Node) private blackScreen: Node;
 
+    @property(SkillManager) private skillManager: SkillManager
+
     private playerCollisionSystem: PlayerCollisionSystem;
     private haloProjectileLauncher: HaloProjectileLauncher;
     private horizontalProjectileLauncher: WaveProjectileLauncher;
@@ -71,6 +74,10 @@ export class Game extends Component {
     private gameResult: GameResult;
 
     private timeAlive = 0;
+
+    public get Player(): Player {
+        return this.player
+    }
 
     public static get Instance(): Game {
         return this.instance;
@@ -125,6 +132,9 @@ export class Game extends Component {
         this.enemyAxeProjectileLauncher.gameTick(deltaTime);
         this.enemyMagicOrbProjectileLauncher.gameTick(deltaTime);
         this.rotatingBladeLauncher.gameTick(deltaTime)
+
+        this.skillManager.gameTick(deltaTime)
+
         this.itemAttractor.gameTick(deltaTime);
         this.background.gameTick();
 

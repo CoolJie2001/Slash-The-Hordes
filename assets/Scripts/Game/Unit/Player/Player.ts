@@ -20,6 +20,8 @@ export class Player extends Component {
     @property(Animation) private animation: Animation;
     @property(Sprite) private sprite: Sprite;
 
+    @property(Node) private skillNode: Node
+
     private input: IInput;
     private health: UnitHealth;
     private level: UnitLevel;
@@ -69,6 +71,10 @@ export class Player extends Component {
 
     public get Direction(): Vec2 {
         return this.dir;
+    }
+
+    public get SkillNode(): Node {
+        return this.skillNode
     }
 
     public get CurrentForward(): number {

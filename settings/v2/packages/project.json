@@ -28,19 +28,24 @@
       {
         "index": 9,
         "name": "MAGNET_RANGE"
+      },
+      {
+        "index": 10,
+        "name": "PLAYER_SKILL"
       }
     ],
     "collisionMatrix": {
       "0": 0,
       "1": 468,
-      "2": 42,
+      "2": 1066,
       "3": 4,
       "4": 514,
       "5": 4,
       "6": 2,
       "7": 2,
       "8": 2,
-      "9": 16
+      "9": 16,
+      "10": 4
     }
   },
   "general": {
@@ -58,5 +63,6 @@
   },
   "script": {
     "preserveSymlinks": true
-  }
+  },
+  "custom_joint_texture_layouts": []
 }
