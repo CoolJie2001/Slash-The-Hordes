@@ -3,6 +3,7 @@ import { Player } from "../Unit/Player/Player";
 import { HaloProjectileLauncher } from "../Projectile/ProjectileLauncher/HaloProjectileLauncher";
 import { WaveProjectileLauncher } from "../Projectile/ProjectileLauncher/WaveProjectileLauncher";
 import { UpgradeType } from "./UpgradeType";
+import { RotatingBladeLauncher } from "../Projectile/ProjectileLauncher/RotatingBladeLauncher";
 
 export class Upgrader {
     private typeToAction: Map<UpgradeType, () => void> = new Map<UpgradeType, () => void>();
@@ -14,6 +15,7 @@ export class Upgrader {
         private horizontalProjectileLauncher: WaveProjectileLauncher,
         private haloProjectileLauncher: HaloProjectileLauncher,
         private diagonalProjectileLauncher: WaveProjectileLauncher,
+        private rotatingBladeLauncher: RotatingBladeLauncher,
         settings: UpgradeSettings
     ) {
         this.setTypeMaps(UpgradeType.WeaponLength, this.upgradeWeaponLength.bind(this), settings.maxWeaponLengthUpgrades);
@@ -26,6 +28,7 @@ export class Upgrader {
         this.setTypeMaps(UpgradeType.DiagonalProjectile, this.upgradeDiagonalProjectileLauncher.bind(this), settings.maxDiagonalProjectileUpgrades);
         this.setTypeMaps(UpgradeType.HaloProjectlie, this.upgradeHaloProjectileLauncher.bind(this), settings.maxHaloProjectileUpgrades);
         this.setTypeMaps(UpgradeType.Regeneration, this.upgradeRegeneration.bind(this), settings.maxRegenerationUpgrades);
+        this.setTypeMaps(UpgradeType.RotatingBlade, this.upgradeRotatingBladeLauncher.bind(this), settings.maxRotatingBladeUpgrades);
     }
 
     public upgradeSkill(type: UpgradeType): void {
@@ -76,6 +79,10 @@ export class Upgrader {
 
     private upgradeRegeneration(): void {
         this.player.Regeneration.upgrade();
+    }
+
+    private upgradeRotatingBladeLauncher(): void {
+        this.rotatingBladeLauncher.upgrade()
     }
 
     private isMaxLevel(type: UpgradeType): boolean {

@@ -19,12 +19,13 @@ export class PlayerSettings {
     public haloLauncher: HaloLauncherSettings = new HaloLauncherSettings();
     public horizontalLauncher: WaveLauncherSettings = new WaveLauncherSettings();
     public diagonalLauncher: WaveLauncherSettings = new WaveLauncherSettings();
+    public rotatingBladeLauncher: RotatingBladeLauncherSettings = new RotatingBladeLauncherSettings();
 }
 
 export class WeaponSettings {
     public strikeDelay = 0;
     public damage = 0;
-    public delay = 0;
+    public batter = 0;
 }
 
 export class WaveLauncherSettings {
@@ -33,6 +34,12 @@ export class WaveLauncherSettings {
 }
 
 export class HaloLauncherSettings {
+    public projectilesToSpawn = 0;
+    public cooldownDivisorPerUpgrade = 0;
+    public launcher = new ProjectileLauncherSettings();
+}
+
+export class RotatingBladeLauncherSettings {
     public projectilesToSpawn = 0;
     public cooldownDivisorPerUpgrade = 0;
     public launcher = new ProjectileLauncherSettings();
@@ -61,6 +68,7 @@ export class UpgradeSettings {
     public maxDiagonalProjectileUpgrades = 0;
     public maxHaloProjectileUpgrades = 0;
     public maxRegenerationUpgrades = 0;
+    public maxRotatingBladeUpgrades = 0;
 }
 
 export class MetaUpgradesSettings {

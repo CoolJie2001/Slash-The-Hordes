@@ -4,7 +4,8 @@ export enum UpgradeType {
     HorizontalProjectile = "HORIZONTAL_PROJECTILE",
     DiagonalProjectile = "DIAGONAL_PROJECTILE",
     HaloProjectlie = "HALO_PROJECTILE",
-    Regeneration = "REGENERATION"
+    Regeneration = "REGENERATION",
+    RotatingBlade = "ROTATING_BLADE"
 }
 
 export enum MetaUpgradeType {
@@ -13,5 +14,5 @@ export enum MetaUpgradeType {
     ProjectilePiercing = "META_PROJECTILE_PIERCING",
     MovementSpeed = "META_MOVEMENT_SPEED",
     XPGatherer = "META_XP_GATHERER",
-    GoldGatherer = "META_GOLD_GATHERER"
+    GoldGatherer = "META_GOLD_GATHERER",
 }

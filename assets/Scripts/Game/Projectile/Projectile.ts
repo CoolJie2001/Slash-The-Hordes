@@ -10,6 +10,9 @@ export class Projectile extends Component {
     private contactBeginEvent = new Signal<ProjectileCollision>();
     private piercesDepletedEvent = new Signal<Projectile>();
 
+    /**
+     * 设置碰撞体是否已经配置了监听事件的标记
+     */
     private isContactListenerSet = false;
 
     private piercesLeft = 0;
@@ -27,6 +30,9 @@ export class Projectile extends Component {
         this.node.setRotationFromEuler(new Vec3(0, 0, angle));
     }
 
+    /**
+     * 穿透, 每次调用减少一次穿透次数
+     */
     public pierce(): void {
         this.piercesLeft--;
         if (this.piercesLeft <= 0) {

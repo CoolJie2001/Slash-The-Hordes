@@ -37,7 +37,7 @@ export class Player extends Component {
         this.regeneration = new PlayerRegeneration(this.health, data.regenerationDelay);
         this.speed = data.speed;
 
-        this.weapon.init(data.strikeDelay, data.damage, data.delay, this);
+        this.weapon.init(data.strikeDelay, data.damage, data.batter, this);
         this.magnet.init(data.magnetDuration);
         this.health.HealthPointsChangeEvent.on(this.animateHpChange, this);
         this.playerUI.init(this.health);
@@ -67,14 +67,17 @@ export class Player extends Component {
         return this.collider;
     }
 
-    public get Direction() : Vec2 {
+    public get Direction(): Vec2 {
         return this.dir;
     }
 
     public get CurrentForward(): number {
         let angleRadians = Math.atan2(this.dir.y, this.dir.x);
 
-        return misc.radiansToDegrees(angleRadians);
+        if (angleRadians)
+            return misc.radiansToDegrees(angleRadians);
+
+        return 0
     }
 
     public gameTick(deltaTime: number): void {
@@ -145,7 +148,10 @@ export class PlayerData {
     // Weapon
     public strikeDelay = 0;
     public damage = 0;
-    public delay = 0;
+    /**
+     * 连击次数
+     */
+    public batter = 1;
 
     // Magnet
     public magnetDuration = 0;

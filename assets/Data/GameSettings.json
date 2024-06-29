@@ -26,9 +26,9 @@
     "collisionDelay": 0.5,
     "magnetDuration": 6,
     "weapon": {
-      "strikeDelay": 0.5,
+      "strikeDelay": 2,
       "damage": 2,
-      "delay" : 1.0
+      "batter": 2
     },
     "haloLauncher": {
       "projectilesToSpawn": 20,
@@ -60,6 +60,15 @@
         "wavesDelayMs": 200,
         "cooldown": 4
       }
+    },
+    "rotatingBladeLauncher": {
+      "projectilesToSpawn": 5,
+      "cooldownDivisorPerUpgrade": 1,
+      "launcher": {
+        "projectileLifetime": 2,
+        "projectileSpeed": 50,
+        "cooldown": 5
+      }
     }
   },
   "upgrades": {
@@ -68,7 +77,8 @@
     "maxHorizontalProjectileUpgrades": 6,
     "maxDiagonalProjectileUpgrades": 6,
     "maxHaloProjectileUpgrades": 6,
-    "maxRegenerationUpgrades": 6
+    "maxRegenerationUpgrades": 6,
+    "maxRotatingBladeUpgrades": 6
   },
   "metaUpgrades": {
     "health": {

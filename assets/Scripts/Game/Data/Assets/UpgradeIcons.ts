@@ -1,4 +1,4 @@
-import { Component, SpriteFrame, _decorator } from "cc";
+import { Component, Sprite, SpriteFrame, _decorator } from "cc";
 import { UpgradeType } from "../../Upgrades/UpgradeType";
 
 const { ccclass, property } = _decorator;
@@ -11,6 +11,7 @@ export class UpgradeIcons extends Component {
     @property(SpriteFrame) private diagonalProjectileSprite: SpriteFrame;
     @property(SpriteFrame) private haloProjectileSprite: SpriteFrame;
     @property(SpriteFrame) private regenerationSprite: SpriteFrame;
+    @property(SpriteFrame) private rotatingBladeSprite: SpriteFrame
 
     private typeToIcon = new Map<UpgradeType, SpriteFrame>();
 
@@ -21,6 +22,7 @@ export class UpgradeIcons extends Component {
         this.typeToIcon.set(UpgradeType.DiagonalProjectile, this.diagonalProjectileSprite);
         this.typeToIcon.set(UpgradeType.HaloProjectlie, this.haloProjectileSprite);
         this.typeToIcon.set(UpgradeType.Regeneration, this.regenerationSprite);
+        this.typeToIcon.set(UpgradeType.RotatingBlade, this.rotatingBladeSprite)
     }
 
     public getIcon(upgradeType: UpgradeType): SpriteFrame {

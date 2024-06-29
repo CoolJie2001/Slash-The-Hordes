@@ -1,4 +1,4 @@
-import { Animation, AnimationState, Component, Node, Vec2, _decorator, v3 } from "cc";
+import { Animation, AnimationState, CCFloat, Component, Node, _decorator, v3 } from "cc";
 import { ISignal } from "../../../../Services/EventSystem/ISignal";
 import { Signal } from "../../../../Services/EventSystem/Signal";
 import { GameTimer } from "../../../../Services/GameTimer";
@@ -15,23 +15,25 @@ export class Weapon extends Component {
     @property(Node)
     private weaponNode: Node;
 
-    @property(Number)
+    @property(CCFloat)
     private offsetDistance: number = 40
 
     private weaponStrikeEvent = new Signal<Weapon>();
 
     private strikeTimer: GameTimer;
     private strikeState: AnimationState;
-    private delay : number;
+    private batter: number;
     private damage: number;
 
     private player: Player;
 
+    private strikeQueue: Promise<void> = Promise.resolve()
 
-    public init(strikeDelay: number, damage: number, delay : number, player: Player): void {
+
+    public init(strikeDelay: number, damage: number, batter: number, player: Player): void {
         this.strikeTimer = new GameTimer(strikeDelay);
         this.damage = damage;
-        this.delay = delay;
+        this.batter = batter;
         this.node.active = false;
 
         this.weaponAnimation.on(Animation.EventType.FINISHED, this.endStrike, this);
@@ -55,8 +57,14 @@ export class Weapon extends Component {
 
             console.log(this.weaponNode.position, this.weaponNode.scale)
 
-            this.strike();
+            for (let i = 0; i < this.batter; i++) {
+                this.enqueueStrike()
+            }
         }
+    }
+
+    enqueueStrike() {
+        this.strikeQueue = this.strikeQueue.then(() => this.strike())
     }
 
     public get WeaponStrikeEvent(): ISignal<Weapon> {
@@ -78,10 +86,22 @@ export class Weapon extends Component {
         this.upgradableCollider.upgrade();
     }
 
-    private strike(): void {
+    private async strike(): Promise<void> {
         this.node.active = true;
         this.weaponAnimation.play(this.strikeState.name);
         this.weaponStrikeEvent.trigger(this);
+
+        await this.waitForAnimationToEnd();
+    }
+
+    private waitForAnimationToEnd(): Promise<void> {
+        return new Promise((resolve) => {
+            const onAnimationEnd = () => {
+                this.weaponAnimation.off(Animation.EventType.FINISHED, onAnimationEnd, this);
+                resolve();
+            };
+            this.weaponAnimation.on(Animation.EventType.FINISHED, onAnimationEnd, this);
+        });
     }
 
     private endStrike(): void {
