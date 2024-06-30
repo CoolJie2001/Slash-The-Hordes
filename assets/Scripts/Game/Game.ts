@@ -133,7 +133,7 @@ export class Game extends Component {
         this.enemyMagicOrbProjectileLauncher.gameTick(deltaTime);
         this.rotatingBladeLauncher.gameTick(deltaTime)
 
-        this.skillManager.gameTick(deltaTime)
+        // this.skillManager.gameTick(deltaTime)
 
         this.itemAttractor.gameTick(deltaTime);
         this.background.gameTick();
