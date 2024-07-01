@@ -55,8 +55,6 @@ export class Weapon extends Component {
 
             this.weaponNode.setPosition(v3(offsetX, offsetY, 0))
 
-            console.log(this.weaponNode.position, this.weaponNode.scale)
-
             for (let i = 0; i < this.batter; i++) {
                 this.enqueueStrike()
             }

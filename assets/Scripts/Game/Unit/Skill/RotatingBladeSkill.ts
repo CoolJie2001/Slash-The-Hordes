@@ -1,7 +1,6 @@
-import { _decorator, BoxCollider2D, CCInteger, Collider, Collider2D, Component, Contact2DType, Node, tween } from 'cc';
-import { Player } from '../Player/Player';
-import { Game } from '../../Game';
+import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D } from 'cc';
 import { BaseSkill } from './BaseSkill';
+import { Enemy } from '../Enemy/Enemy';
 const { ccclass, property } = _decorator;
 
 /**
@@ -10,25 +9,27 @@ const { ccclass, property } = _decorator;
 @ccclass('RotatingBladeSkill')
 export class RotatingBladeSkill extends BaseSkill {
 
-    private collider : BoxCollider2D
 
-    private elapsedTime : number = 0
+    private elapsedTime: number = 0
 
     start() {
-        console.log('进入到RotatingBlade的start()')
-
-        this.collider = this.node.getComponent(BoxCollider2D)
-        this.collider.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
     }
 
-    onColliderContactBegin(thisCollider: Collider2D, otherCollider: Collider2D) {
-        console.log(`碰撞到的对象名字:${otherCollider.node.name}`)
+    protected override init(damage: number, duration: number, speed: number) {
+        super.init(damage, duration, speed)
+
+        console.log('进入到RotatingBlade的init()')
+        // PhysicsSystem2D.instance.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this);
     }
 
-    update(deltaTime : number) {
+
+
+
+
+    update(deltaTime: number) {
         if (this.elapsedTime < this.LifeTime) {
             this.elapsedTime += deltaTime
-            const rotationSpeed = 360 
+            const rotationSpeed = 360
             this.node.angle += rotationSpeed * deltaTime
         } else {
             this.node.active = false
