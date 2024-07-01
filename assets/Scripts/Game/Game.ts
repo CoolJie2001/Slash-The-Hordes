@@ -47,7 +47,7 @@ export class Game extends Component {
     @property(ProjectileLauncher) private diagonalProjectileLauncherComponent: ProjectileLauncher;
     @property(ProjectileLauncher) private enemyAxeProjectileLauncherComponent: ProjectileLauncher;
     @property(ProjectileLauncher) private enemyMagicOrbProjectileLauncherComponent: ProjectileLauncher;
-    @property(ProjectileLauncher) private rotatingBladeProjectileLauncherComponent: ProjectileLauncher;
+    
     @property(EnemyManager) private enemyManager: EnemyManager;
     @property(EnemyDeathEffectSpawner) private deathEffectSpawner: EnemyDeathEffectSpawner;
     @property(ItemManager) private itemManager: ItemManager;
@@ -131,9 +131,9 @@ export class Game extends Component {
         this.diagonalProjectileLauncher.gameTick(deltaTime);
         this.enemyAxeProjectileLauncher.gameTick(deltaTime);
         this.enemyMagicOrbProjectileLauncher.gameTick(deltaTime);
-        this.rotatingBladeLauncher.gameTick(deltaTime)
+        // this.rotatingBladeLauncher.gameTick(deltaTime)
 
-        // this.skillManager.gameTick(deltaTime)
+        this.skillManager.gameTick(deltaTime)
 
         this.itemAttractor.gameTick(deltaTime);
         this.background.gameTick();
@@ -206,18 +206,10 @@ export class Game extends Component {
             settings.enemyManager.magicOrbLauncher
         );
 
-        this.rotatingBladeLauncher = new RotatingBladeLauncher(
-            this.rotatingBladeProjectileLauncherComponent,
-            this.player.node,
-            settings.player.rotatingBladeLauncher,
-            projectileData
-        )
-
         new PlayerProjectileCollisionSystem([
             this.haloProjectileLauncher,
             this.horizontalProjectileLauncher,
             this.diagonalProjectileLauncher,
-            this.rotatingBladeLauncher
         ]);
 
         this.itemAttractor = new ItemAttractor(this.player.node, 100);
@@ -228,7 +220,6 @@ export class Game extends Component {
             this.horizontalProjectileLauncher,
             this.haloProjectileLauncher,
             this.diagonalProjectileLauncher,
-            this.rotatingBladeLauncher,
             settings.upgrades
         );
         const modalLauncher = new GameModalLauncher(AppRoot.Instance.ModalWindowManager, this.player, this.gamePauser, upgrader, translationData);

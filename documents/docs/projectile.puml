@@ -1,0 +1,5 @@
+@startuml ProjectileLauncher
+ProjectileLauncher*--HaloProjectileLauncher
+ProjectileLauncher*--WaveProjectileLauncher
+
+@enduml

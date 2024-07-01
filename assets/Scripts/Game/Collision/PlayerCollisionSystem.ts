@@ -85,7 +85,6 @@ export class PlayerCollisionSystem {
     }
 
     private resolveItemContact(xpCollider: Collider2D): void {
-        console.log("Collided with item");
         this.itemManager.pickupItem(xpCollider.node.getComponent(Item));
     }
 }
