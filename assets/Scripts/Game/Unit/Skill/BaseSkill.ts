@@ -84,8 +84,6 @@ export class BaseSkill extends Component {
     // }
 
     onColliderContactBegin(thisCollider: Collider2D, otherCollider: Collider2D): void {
-        console.log(`碰撞到的对象名字:${otherCollider.node.name}, Id:${otherCollider.node.uuid}`)
-
         let enemy = otherCollider.getComponent(Enemy)
 
         if (enemy)
