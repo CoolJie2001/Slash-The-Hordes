@@ -1,4 +1,4 @@
-import { BoxCollider2D, Component, Material, randomRange, Sprite, Vec3, _decorator } from "cc";
+import { BoxCollider2D, Component, Material, randomRange, Sprite, Vec3, _decorator, Vec2 } from "cc";
 import { ISignal } from "../../../Services/EventSystem/ISignal";
 import { Signal } from "../../../Services/EventSystem/Signal";
 import { delay } from "../../../Services/Utils/AsyncUtils";
@@ -33,6 +33,12 @@ export class Enemy extends Component {
     private chestRewardChance: number;
 
     private endOfLifetimeTriggered = false;
+
+    private knockbackDirection : Vec2 = new Vec2()
+    private knockbackTimeLeft : number = 0
+    private knockbackSpeed : number = 0
+
+    private currentDirection : Vec2 = new Vec2()
 
     public setup(position: Vec3, settings: EnemySettings): void {
         this.id = settings.id;
@@ -104,6 +110,10 @@ export class Enemy extends Component {
         return this.lifetimeEndedEvent;
     }
 
+    public get CurrentDirection() : Vec2 {
+        return this.currentDirection
+    }
+
     public dealDamage(points: number): void {
         this.health.damage(points);
         if (!this.health.IsAlive) {
@@ -113,8 +123,22 @@ export class Enemy extends Component {
 
     public gameTick(move: Vec3, deltaTime: number): void {
         const newPosition: Vec3 = this.node.worldPosition;
-        newPosition.x += move.x * this.speedX * deltaTime;
-        newPosition.y += move.y * this.speedY * deltaTime;
+
+        if (this.knockbackTimeLeft > 0) {
+            newPosition.x += this.knockbackDirection.x * this.knockbackSpeed * deltaTime
+            newPosition.y += this.knockbackDirection.y * this.knockbackSpeed * deltaTime
+            this.knockbackTimeLeft -= deltaTime
+
+            // 确保 knockbackTimeLeft 不会变成负数
+            if (this.knockbackTimeLeft < 0) {
+                this.knockbackTimeLeft = 0;
+            }
+        } else {
+            newPosition.x += move.x * this.speedX * deltaTime;
+            newPosition.y += move.y * this.speedY * deltaTime;
+        }
+
+        this.currentDirection.set(move.x, move.y).normalize()
 
         // 敌人往左右移动的时候把敌人的图片左右镜像
         if (move.x < 0) {
@@ -133,6 +157,25 @@ export class Enemy extends Component {
             } else if (this.lifetimeLeft <= 2) {
                 this.animateEndOfLifetime();
             }
+        }
+    }
+
+    /**
+     * 击退
+     * @param direction 击退的方向
+     * @param distance 击退的距离
+     * @param duration 击退的持续时间
+     */
+    public async knockback(direction: Vec2, distance : number, duration : number) : Promise<void> {
+        this.knockbackDirection = direction.normalize()
+        this.knockbackSpeed = distance / duration
+        this.knockbackTimeLeft = duration
+
+        while (this.knockbackTimeLeft > 0) {
+            // 每帧减少击退时间
+            const deltaTime = 1 / 60; // 例如，假设帧率为60FPS
+            this.knockbackTimeLeft -= deltaTime;
+            await delay(deltaTime * 1000);
         }
     }
 

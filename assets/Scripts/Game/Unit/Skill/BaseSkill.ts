@@ -34,9 +34,6 @@ export class BaseSkill extends Component {
     @property(CCFloat)
     private speed: number = 1
 
-    @property(BoxCollider2D)
-    private collider: BoxCollider2D
-
     private isFire: boolean = false
 
     public get Damage(): number {
@@ -67,8 +64,6 @@ export class BaseSkill extends Component {
         this.init(this.damage, this.duration, this.speed)
 
         this.gameTimer = new GameTimer(this.duration)
-
-        this.collider.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
     }
 
     // protected onEnable(): void {
@@ -82,13 +77,6 @@ export class BaseSkill extends Component {
     //     this.collider.off(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
 
     // }
-
-    onColliderContactBegin(thisCollider: Collider2D, otherCollider: Collider2D): void {
-        let enemy = otherCollider.getComponent(Enemy)
-
-        if (enemy)
-            enemy.dealDamage(this.Damage);
-    }
 
     protected init(damage: number, duration: number, speed: number) {
         this.damage = damage

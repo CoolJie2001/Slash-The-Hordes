@@ -1,4 +1,4 @@
-import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D } from 'cc';
+import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D, v2 } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { Enemy } from '../Enemy/Enemy';
 const { ccclass, property } = _decorator;
@@ -8,7 +8,8 @@ const { ccclass, property } = _decorator;
  */
 @ccclass('RotatingBladeSkill')
 export class RotatingBladeSkill extends BaseSkill {
-
+    @property(BoxCollider2D)
+    private collider: BoxCollider2D
 
     private elapsedTime: number = 0
 
@@ -19,12 +20,21 @@ export class RotatingBladeSkill extends BaseSkill {
         super.init(damage, duration, speed)
 
         console.log('进入到RotatingBlade的init()')
-        // PhysicsSystem2D.instance.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this);
+
+        this.collider.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
     }
 
+    async onColliderContactBegin(thisCollider: Collider2D, otherCollider: Collider2D): Promise<void> {
+        let enemy = otherCollider.getComponent(Enemy)
 
+        if (enemy) {
+            const dir = v2(-enemy.CurrentDirection.x, -enemy.CurrentDirection.y)
 
+            await enemy.knockback(dir, 25.0, 0.1)
 
+            enemy.dealDamage(this.Damage);
+        }
+    }
 
     update(deltaTime: number) {
         if (this.elapsedTime < this.LifeTime) {

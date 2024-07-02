@@ -77,6 +77,10 @@ export class Weapon extends Component {
         return this.damage;
     }
 
+    public get WeaponNode() : Node {
+        return this.weaponNode
+    }
+
     public upgradeWeaponDamage(): void {
         this.damage++;
     }
