@@ -1,6 +1,7 @@
 import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D, v2 } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { Enemy } from '../Enemy/Enemy';
+import { SkillUpgradeType } from '../../Upgrades/UpgradeType';
 const { ccclass, property } = _decorator;
 
 /**
@@ -19,7 +20,7 @@ export class RotatingBladeSkill extends BaseSkill {
     protected override init(damage: number, duration: number, speed: number) {
         super.init(damage, duration, speed)
 
-        console.log('进入到RotatingBlade的init()')
+        this.UpgradeType = SkillUpgradeType.RotatingBlade
 
         this.collider.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
     }

@@ -1,3 +1,4 @@
+
 export enum UpgradeType {
     WeaponLength = "WEAPON_LENGTH",
     WeaponDamage = "WEAPON_DAMAGE",
@@ -15,4 +16,14 @@ export enum MetaUpgradeType {
     MovementSpeed = "META_MOVEMENT_SPEED",
     XPGatherer = "META_XP_GATHERER",
     GoldGatherer = "META_GOLD_GATHERER",
+}
+
+/**
+ * 允许升级的技能类别
+ */
+export enum SkillUpgradeType {
+    /**
+     * 旋转刀片技能
+     */
+    RotatingBlade = 1
 }

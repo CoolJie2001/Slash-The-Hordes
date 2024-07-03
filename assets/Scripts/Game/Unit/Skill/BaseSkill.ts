@@ -1,13 +1,19 @@
-import { _decorator, BoxCollider2D, CCFloat, Collider2D, Component, Contact2DType, Node, sp, Vec3 } from 'cc';
+import { _decorator, BoxCollider2D, CCFloat, Collider2D, Component, Contact2DType, Enum, Node, sp, Vec3 } from 'cc';
 import { Player } from '../Player/Player';
 import { GameTimer } from '../../../Services/GameTimer';
-import { Enemy } from '../Enemy/Enemy';
+import { SkillUpgradeType, UpgradeType } from '../../Upgrades/UpgradeType';
 const { ccclass, property } = _decorator;
+
+Enum(SkillUpgradeType)
 
 @ccclass('BaseSkill')
 export class BaseSkill extends Component {
+
     @property(Player)
     private player: Player
+
+    @property({ type: SkillUpgradeType })
+    private upgradeType: SkillUpgradeType
 
     private gameTimer: GameTimer
 
@@ -60,23 +66,26 @@ export class BaseSkill extends Component {
         this.isFire = value
     }
 
+    public get UpgradeType(): SkillUpgradeType {
+        return this.upgradeType
+    }
+
+    public set UpgradeType(value: SkillUpgradeType) {
+        this.upgradeType = value
+    }
+
     public setup() {
         this.init(this.damage, this.duration, this.speed)
 
         this.gameTimer = new GameTimer(this.duration)
     }
 
-    // protected onEnable(): void {
-    //     console.log(`${this.node.name} ---- onEnable`)
-    //     this.collider.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
+    /**
+     * 技能升级
+     */
+    public upgrade() {
 
-    // }
-
-    // protected onDisable(): void {
-    //     console.log(`${this.node.name} ---- onDisable`)
-    //     this.collider.off(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
-
-    // }
+    }
 
     protected init(damage: number, duration: number, speed: number) {
         this.damage = damage

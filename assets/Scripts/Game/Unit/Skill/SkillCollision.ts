@@ -9,5 +9,3 @@ export class SkillCollision {
 
     public skill: BaseSkill
 }
-
-

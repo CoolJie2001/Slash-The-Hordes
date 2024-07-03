@@ -1,3 +1,4 @@
+import { RotatingBladeLauncher } from "../Projectile/ProjectileLauncher/RotatingBladeLauncher";
 import { EnemyProjectileLauncher } from "../Unit/Enemy/ProjectileLauncher.cs/EnemyProjectileLauncher";
 
 export class GameSettings {
@@ -6,6 +7,7 @@ export class GameSettings {
     public metaUpgrades: MetaUpgradesSettings = new MetaUpgradesSettings();
     public enemyManager: EnemyManagerSettings = new EnemyManagerSettings();
     public items: ItemSettings = new ItemSettings();
+    public rotatingBlade: RotatingBladeLauncher = new RotatingBladeLauncher()
 }
 
 export class PlayerSettings {
@@ -19,7 +21,7 @@ export class PlayerSettings {
     public haloLauncher: HaloLauncherSettings = new HaloLauncherSettings();
     public horizontalLauncher: WaveLauncherSettings = new WaveLauncherSettings();
     public diagonalLauncher: WaveLauncherSettings = new WaveLauncherSettings();
-    public rotatingBladeLauncher: RotatingBladeLauncherSettings = new RotatingBladeLauncherSettings();
+    public rotatingBladeLauncher: RotatingBladeLauncher = new RotatingBladeLauncher();
 }
 
 export class WeaponSettings {
@@ -39,18 +41,19 @@ export class HaloLauncherSettings {
     public launcher = new ProjectileLauncherSettings();
 }
 
-export class RotatingBladeLauncherSettings {
-    public projectilesToSpawn = 0;
-    public cooldownDivisorPerUpgrade = 0;
-    public launcher = new ProjectileLauncherSettings();
-}
-
 export class EnemyLauncherSettings {
     public enemyIds: string[] = [];
     public projectileLifetime = 0;
     public projectileSpeed = 0;
     public projectileDamage = 0;
     public cooldown = 0;
+}
+
+export class SkillLauncherSettings {
+    public skillCooldown = 0;
+    public skillDuration = 0;
+    public damage = 0;
+
 }
 
 export class ProjectileLauncherSettings {

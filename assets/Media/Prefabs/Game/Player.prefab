@@ -364,6 +364,7 @@
     "player": {
       "__id__": 13
     },
+    "upgradeType": 1,
     "damage": 10,
     "duration": 3,
     "lifeTime": 2,

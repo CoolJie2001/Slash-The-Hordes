@@ -47,7 +47,7 @@ export class Game extends Component {
     @property(ProjectileLauncher) private diagonalProjectileLauncherComponent: ProjectileLauncher;
     @property(ProjectileLauncher) private enemyAxeProjectileLauncherComponent: ProjectileLauncher;
     @property(ProjectileLauncher) private enemyMagicOrbProjectileLauncherComponent: ProjectileLauncher;
-    
+
     @property(EnemyManager) private enemyManager: EnemyManager;
     @property(EnemyDeathEffectSpawner) private deathEffectSpawner: EnemyDeathEffectSpawner;
     @property(ItemManager) private itemManager: ItemManager;
@@ -220,6 +220,7 @@ export class Game extends Component {
             this.horizontalProjectileLauncher,
             this.haloProjectileLauncher,
             this.diagonalProjectileLauncher,
+            this.skillManager,
             settings.upgrades
         );
         const modalLauncher = new GameModalLauncher(AppRoot.Instance.ModalWindowManager, this.player, this.gamePauser, upgrader, translationData);

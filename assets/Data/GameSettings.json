@@ -61,13 +61,11 @@
         "cooldown": 4
       }
     },
-    "rotatingBladeLauncher": {
-      "projectilesToSpawn": 5,
-      "cooldownDivisorPerUpgrade": 1,
-      "launcher": {
-        "projectileLifetime": 2,
-        "projectileSpeed": 50,
-        "cooldown": 5
+    "skillManager": {
+      "rotatingBladeSkill": {
+        "skillCooldown": 3,
+        "skillDuration": 2,
+        "damage": 10
       }
     }
   },
