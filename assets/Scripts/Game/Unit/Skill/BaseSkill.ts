@@ -23,10 +23,10 @@ export class BaseSkill extends Component {
     @property(CCFloat)
     private damage: number = 100
     /**
-     * 技能持续时间
+     * 技能冷却时间
      */
     @property(CCFloat)
-    private duration: number = 3
+    private cooldown: number = 3
 
     /**
      * 技能存活时间
@@ -46,22 +46,37 @@ export class BaseSkill extends Component {
         return this.damage
     }
 
-    public get Duration(): number {
-        return this.duration
+    /**
+     * 技能冷却时间
+     */
+    public get Cooldown(): number {
+        return this.cooldown
     }
 
+    /**
+     * 技能存活时间
+     */
     public get LifeTime(): number {
         return this.lifeTime
     }
 
+    /**
+     * 技能的速度
+     */
     public get Speed(): number {
         return this.speed
     }
 
+    /**
+     * 技能是否已经释放
+     */
     public get IsFire(): boolean {
         return this.isFire
     }
 
+    /**
+     * 设置技能释放状态
+     */
     public set IsFire(value: boolean) {
         this.isFire = value
     }
@@ -75,9 +90,9 @@ export class BaseSkill extends Component {
     }
 
     public setup() {
-        this.init(this.damage, this.duration, this.speed)
+        this.init(this.damage, this.cooldown, this.speed)
 
-        this.gameTimer = new GameTimer(this.duration)
+        this.gameTimer = new GameTimer(this.cooldown)
     }
 
     /**
@@ -89,7 +104,7 @@ export class BaseSkill extends Component {
 
     protected init(damage: number, duration: number, speed: number) {
         this.damage = damage
-        this.duration = duration
+        this.cooldown = duration
         this.speed = speed
 
         this.node.active = false
