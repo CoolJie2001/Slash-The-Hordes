@@ -1,5 +1,60 @@
 @startuml ProjectileLauncher
-ProjectileLauncher*--HaloProjectileLauncher
-ProjectileLauncher*--WaveProjectileLauncher
+interface IProjectileLauncherSignaler {
+    ISignal<ProjectileCollision> ProjectileCollisionEvent()
+    ISignal ProjectileLaunchedEvent()
+}
+
+class Projectile {
+    -Collider2D collider
+    -Signal<ProjectileCollision> contactBeginEvent
+    -Signal<Projectile> piercesDepletedEvent
+
+    +void setup(number damage, number pierces, number angle)
+    +void pierce()
+    +number Damage()
+    +ISignal<ProjectileCollision> ContactBeginEvent()
+    +ISignal<Projectile> PiercesDepletedEvent()
+}
+
+note bottom of Projectile: 玩家发射的技能(一般是可飞行的)
+
+class HaloProjectileLauncher {
+    -Node playerNode
+    -ProjectileLauncher launcher
+}
+
+class WaveProjectileLauncher {
+    -Node playerNode
+    -ProjectileLauncher launcher
+}
+
+class Component
+class ProjectileLauncher {
+    -Prefab projectilePrefab
+    -ObjectPool<Projectile> projectilePool
+    +void gameTick(number deltaTime)
+}
+
+note left of ProjectileLauncher: 生成玩家发射的技能, \r\n挂载在场景Game节点下的各个ProjectileLauncher节点上
+
+note "发射的物件都被ProjectileLauncher进行管理" as N1
+
+class WaveLauncherSettings
+class HaloLauncherSettings
+
+Component <|-- ProjectileLauncher
+Component <|-- Projectile
+IProjectileLauncherSignaler <|-- ProjectileLauncher
+IProjectileLauncherSignaler <|-- HaloProjectileLauncher
+IProjectileLauncherSignaler <|-- WaveProjectileLauncher
+
+ProjectileLauncher "1" --* "1" HaloProjectileLauncher : 包含
+ProjectileLauncher "1" --* "1" WaveProjectileLauncher : 包含
+
+ProjectileLauncher "1" -- N1 
+N1 -- "*" Projectile : 管理
+
+HaloProjectileLauncher--HaloLauncherSettings : use
+WaveProjectileLauncher--WaveLauncherSettings : use
 
 @enduml
