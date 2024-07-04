@@ -1,4 +1,5 @@
 @startuml ProjectileLauncher
+skinparam dpi 300
 interface IProjectileLauncherSignaler {
     ISignal<ProjectileCollision> ProjectileCollisionEvent()
     ISignal ProjectileLaunchedEvent()
@@ -21,11 +22,15 @@ note bottom of Projectile: 玩家发射的技能(一般是可飞行的)
 class HaloProjectileLauncher {
     -Node playerNode
     -ProjectileLauncher launcher
+    +void gameTick(number deltaTime)
+    +void upgrade()
 }
 
 class WaveProjectileLauncher {
     -Node playerNode
     -ProjectileLauncher launcher
+    +void gameTick(number deltaTime)
+    +void upgrade()
 }
 
 class Component
@@ -33,6 +38,11 @@ class ProjectileLauncher {
     -Prefab projectilePrefab
     -ObjectPool<Projectile> projectilePool
     +void gameTick(number deltaTime)
+}
+
+class ProjectileData {
+    +pierces;
+    +damage;
 }
 
 note left of ProjectileLauncher: 生成玩家发射的技能, \r\n挂载在场景Game节点下的各个ProjectileLauncher节点上
@@ -56,5 +66,6 @@ N1 -- "*" Projectile : 管理
 
 HaloProjectileLauncher--HaloLauncherSettings : use
 WaveProjectileLauncher--WaveLauncherSettings : use
+ProjectileLauncher -- ProjectileData : use
 
 @enduml
