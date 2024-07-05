@@ -1,4 +1,4 @@
-import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D, v2 } from 'cc';
+import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D, TextAsset, v2 } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { Enemy } from '../Enemy/Enemy';
 import { SkillUpgradeType } from '../../Upgrades/UpgradeType';
@@ -12,9 +12,19 @@ export class RotatingBladeSkill extends BaseSkill {
     @property(BoxCollider2D)
     private collider: BoxCollider2D
 
+    @property(TextAsset)
+    skillSettings: TextAsset = null!
+
     private elapsedTime: number = 0
 
+
+
     start() {
+        const data = this.skillSettings.text!
+
+        for (let line in data.split('\r\n`')) {
+            console.log(line)
+        }
     }
 
     protected override init(damage: number, duration: number, speed: number) {
