@@ -2,6 +2,7 @@ import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D, 
 import { BaseSkill } from './BaseSkill';
 import { Enemy } from '../Enemy/Enemy';
 import { SkillUpgradeType } from '../../Upgrades/UpgradeType';
+import { CsvReader } from '../../../Services/Utils/CsvUtils';
 const { ccclass, property } = _decorator;
 
 /**
@@ -17,14 +18,14 @@ export class RotatingBladeSkill extends BaseSkill {
 
     private elapsedTime: number = 0
 
-
-
     start() {
         const data = this.skillSettings.text!
 
-        for (let line in data.split('\r\n`')) {
-            console.log(line)
-        }
+        let arr = CsvReader.parseCsv(data)
+
+        arr.forEach((element, index, arr) => {
+            console.log(element)
+        })
     }
 
     protected override init(damage: number, duration: number, speed: number) {
