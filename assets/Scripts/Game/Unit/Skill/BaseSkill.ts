@@ -12,9 +12,6 @@ export class BaseSkill extends Component {
     @property(Player)
     private player: Player
 
-    @property({ type: SkillUpgradeType })
-    private upgradeType: SkillUpgradeType
-
     private gameTimer: GameTimer
 
     /**
@@ -34,13 +31,19 @@ export class BaseSkill extends Component {
     @property(CCFloat)
     private lifeTime: number = 2
 
-    /**
-     * 技能的速度
-     */
-    @property(CCFloat)
-    private speed: number = 1
+    private skillSettings: any[]
 
     private isFire: boolean = false
+
+    private id: string
+
+    public get Id(): string {
+        return this.id
+    }
+
+    public set Id(value: string) {
+        this.id = value
+    }
 
     public get Damage(): number {
         return this.damage
@@ -61,13 +64,6 @@ export class BaseSkill extends Component {
     }
 
     /**
-     * 技能的速度
-     */
-    public get Speed(): number {
-        return this.speed
-    }
-
-    /**
      * 技能是否已经释放
      */
     public get IsFire(): boolean {
@@ -81,16 +77,18 @@ export class BaseSkill extends Component {
         this.isFire = value
     }
 
-    public get UpgradeType(): SkillUpgradeType {
-        return this.upgradeType
+    public get SkillSettings(): any[] {
+        return this.skillSettings
     }
 
-    public set UpgradeType(value: SkillUpgradeType) {
-        this.upgradeType = value
-    }
+    public setup(skillSetting: any[]) {
+        this.skillSettings = skillSetting
 
-    public setup() {
-        this.init(this.damage, this.cooldown, this.speed)
+        if (this.skillSettings.length > 0) {
+            const data = this.skillSettings[0]
+
+            this.init(data.damage, data.cooldown)
+        }
 
         this.gameTimer = new GameTimer(this.cooldown)
     }
@@ -102,10 +100,9 @@ export class BaseSkill extends Component {
 
     }
 
-    protected init(damage: number, duration: number, speed: number) {
+    protected init(damage: number, duration: number) {
         this.damage = damage
         this.cooldown = duration
-        this.speed = speed
 
         this.node.active = false
     }

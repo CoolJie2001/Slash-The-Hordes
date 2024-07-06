@@ -1,8 +1,6 @@
-import { _decorator, BoxCollider2D, Collider2D, Contact2DType, PhysicsSystem2D, TextAsset, v2 } from 'cc';
+import { _decorator, BoxCollider2D, Collider2D, Contact2DType, v2 } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { Enemy } from '../Enemy/Enemy';
-import { SkillUpgradeType } from '../../Upgrades/UpgradeType';
-import { CsvReader } from '../../../Services/Utils/CsvUtils';
 const { ccclass, property } = _decorator;
 
 /**
@@ -13,25 +11,13 @@ export class RotatingBladeSkill extends BaseSkill {
     @property(BoxCollider2D)
     private collider: BoxCollider2D
 
-    @property(TextAsset)
-    skillSettings: TextAsset = null!
-
     private elapsedTime: number = 0
 
     start() {
-        const data = this.skillSettings.text!
-
-        let arr = CsvReader.parseCsv(data)
-
-        arr.forEach((element, index, arr) => {
-            console.log(element)
-        })
     }
 
-    protected override init(damage: number, duration: number, speed: number) {
-        super.init(damage, duration, speed)
-
-        this.UpgradeType = SkillUpgradeType.RotatingBlade
+    protected override init(damage: number, duration: number) {
+        super.init(damage, duration)
 
         this.collider.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
     }

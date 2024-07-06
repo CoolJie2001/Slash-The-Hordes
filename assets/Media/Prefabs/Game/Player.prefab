@@ -37,7 +37,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 182
+        "__id__": 183
       },
       {
         "__id__": 13
@@ -47,7 +47,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 184
+      "__id__": 185
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -94,11 +94,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 179
+        "__id__": 180
       }
     ],
     "_prefab": {
-      "__id__": 181
+      "__id__": 182
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -152,7 +152,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 178
+      "__id__": 179
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -364,11 +364,9 @@
     "player": {
       "__id__": 13
     },
-    "upgradeType": 1,
     "damage": 10,
-    "duration": 3,
+    "cooldown": 3,
     "lifeTime": 2,
-    "speed": 1,
     "collider": {
       "__id__": 9
     },
@@ -3927,9 +3925,9 @@
     "__prefab": {
       "__id__": 177
     },
-    "skills": [
+    "skillConfigs": [
       {
-        "__id__": 11
+        "__id__": 178
       }
     ],
     "_id": ""
@@ -3937,6 +3935,14 @@
   {
     "__type__": "cc.CompPrefabInfo",
     "fileId": "deZm+PnkNORYds+44Fqhki"
+  },
+  {
+    "__type__": "SkillConfig",
+    "id": "1",
+    "prefab": {
+      "__uuid__": "caed775b-1f5b-4679-bdfe-0bf6c92f7873",
+      "__expectedType__": "cc.Prefab"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -3961,7 +3967,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 180
+      "__id__": 181
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -4002,7 +4008,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 183
+      "__id__": 184
     },
     "_contentSize": {
       "__type__": "cc.Size",
