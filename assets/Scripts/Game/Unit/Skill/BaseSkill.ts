@@ -87,7 +87,7 @@ export class BaseSkill extends Component {
         if (this.skillSettings.length > 0) {
             const data = this.skillSettings[0]
 
-            this.init(data.damage, data.cooldown)
+            this.init(data.damage, data.cooldown, data.lifeTime)
         }
 
         this.gameTimer = new GameTimer(this.cooldown)
@@ -100,9 +100,10 @@ export class BaseSkill extends Component {
 
     }
 
-    protected init(damage: number, duration: number) {
+    protected init(damage: number, duration: number, lifeTime: number) {
         this.damage = damage
         this.cooldown = duration
+        this.lifeTime = lifeTime
 
         this.node.active = false
     }

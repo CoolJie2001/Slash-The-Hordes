@@ -1,4 +1,4 @@
-﻿id,damage,cooldown,lifetime,level,describe,uplevel
-1,5,3,2,1,"发出一道旋转刀光, 割伤敌人",
-1,10,6,4,2,"发出一道旋转刀光, 割伤敌人","攻击力提高100%, 冷却时间提高100%"
-1,15,6,5,3,"发出一道旋转刀光, 割伤敌人",攻击力提高50%
+﻿id,damage,cooldown,lifetime,level,describe,name
+"ROTATING_BLADE",5,3,2,1,"旋风刃以你为中心进行旋转, 击伤敌人", "旋风刃"
+"ROTATING_BLADE",10,6,4,2,"攻击力提高100%, 冷却时间提高100%","旋风刃"
+"ROTATING_BLADE",15,6,5,3,"攻击力提高50%", "旋风刃"

@@ -16,8 +16,8 @@ export class LevelUpSkill extends Component {
 
     public init(skillType: UpgradeType, translationData: TranslationData): void {
         this.skillType = skillType;
-        this.skillTitle.string = `${translationData[`${skillType}_TITLE`]}`;
-        this.skillDescription.string = `${translationData[`${skillType}_DESC`]}`;
+        this.skillTitle.string = `${translationData.GetTitle(skillType)}`;
+        this.skillDescription.string = `${translationData.GetDescribe(skillType)}`;
         this.skillIcon.spriteFrame = AppRoot.Instance.GameAssets.UpgradeIcons.getIcon(skillType);
         this.node.on(NodeEventType.TOUCH_START, this.chooseSkill, this);
     }

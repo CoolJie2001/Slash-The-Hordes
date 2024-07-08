@@ -1,15 +1,9 @@
 import { _decorator, BoxCollider, BoxCollider2D, Component, instantiate, Node, Prefab, resources, TextAsset } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { CsvReader } from '../../../Services/Utils/CsvUtils';
-import { RotatingBladeSkill } from './RotatingBladeSkill';
 import { DebugNodeUtils } from '../../../Services/Utils/DebugNodeUtils';
 import { SkillConfig } from './SkillConfig';
 const { ccclass, property } = _decorator;
-
-interface SkillLevelData {
-    level: number;
-    [key: string]: any;
-}
 
 /**
  * 管理当前玩家的技能类

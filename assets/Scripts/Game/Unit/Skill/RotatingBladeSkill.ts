@@ -1,6 +1,7 @@
 import { _decorator, BoxCollider2D, Collider2D, Contact2DType, v2 } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { Enemy } from '../Enemy/Enemy';
+import { RotatingBladeSetting } from './Settings/RotatingBladeSetting';
 const { ccclass, property } = _decorator;
 
 /**
@@ -13,11 +14,15 @@ export class RotatingBladeSkill extends BaseSkill {
 
     private elapsedTime: number = 0
 
+    public get RotatingBladeSettings(): RotatingBladeSetting[] {
+        return this.SkillSettings
+    }
+
     start() {
     }
 
-    protected override init(damage: number, duration: number) {
-        super.init(damage, duration)
+    protected override init(damage: number, duration: number, lifeTime: number) {
+        super.init(damage, duration, lifeTime)
 
         this.collider.on(Contact2DType.BEGIN_CONTACT, this.onColliderContactBegin, this)
     }

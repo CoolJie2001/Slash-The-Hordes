@@ -23,7 +23,7 @@ export enum MetaUpgradeType {
  */
 export enum SkillUpgradeType {
     /**
-     * 旋转刀片技能
+     * 旋风刃技能
      */
     RotatingBlade = 1
 }

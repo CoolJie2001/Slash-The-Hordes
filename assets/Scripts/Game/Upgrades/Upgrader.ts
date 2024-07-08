@@ -2,11 +2,13 @@ import { UpgradeSettings } from "../Data/GameSettings";
 import { Player } from "../Unit/Player/Player";
 import { HaloProjectileLauncher } from "../Projectile/ProjectileLauncher/HaloProjectileLauncher";
 import { WaveProjectileLauncher } from "../Projectile/ProjectileLauncher/WaveProjectileLauncher";
-import { SkillUpgradeType, UpgradeType } from "./UpgradeType";
-import { RotatingBladeLauncher } from "../Projectile/ProjectileLauncher/RotatingBladeLauncher";
+import { UpgradeType } from "./UpgradeType";
 import { SkillManager } from "../Unit/Skill/SkillManager";
 
 export class Upgrader {
+    /**
+     * 技能升级Map, Key :升级类型, Value: Map<升级Action, 最大升级级别>
+     */
     private typeToAction: Map<UpgradeType, () => void> = new Map<UpgradeType, () => void>();
     private typeToLevel: Map<UpgradeType, number> = new Map<UpgradeType, number>();
     private typeToMaxLevel: Map<UpgradeType, number> = new Map<UpgradeType, number>();
@@ -83,7 +85,7 @@ export class Upgrader {
     }
 
     private upgradeRotatingBladeLauncher(): void {
-        this.skillManager.upgrade(SkillUpgradeType.RotatingBlade)
+        this.skillManager.upgrade(UpgradeType.RotatingBlade)
     }
 
     private isMaxLevel(type: UpgradeType): boolean {
