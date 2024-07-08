@@ -52,7 +52,7 @@ export class AppRoot extends Component {
     public get TranslationData(): TranslationData {
         let translationData = <TranslationData>this.engTranslationAsset.json;
 
-        
+     
     }
 
     public get ModalWindowManager(): ModalWindowManager {

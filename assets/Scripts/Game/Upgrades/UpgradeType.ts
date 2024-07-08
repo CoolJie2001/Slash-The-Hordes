@@ -1,3 +1,4 @@
+import { Enum } from "cc"
 
 export enum UpgradeType {
     WeaponLength = "WEAPON_LENGTH",
@@ -26,4 +27,18 @@ export enum SkillUpgradeType {
      * 旋风刃技能
      */
     RotatingBlade = 1
+}
+
+export class EnumUtils {
+
+    public static createEnumFromStringEnum<T extends Record<string, string>>(stringEnum: T): Record<keyof T, number> {
+        const result: Record<string, number> = {};
+        let index = 0;
+        for (const key in stringEnum) {
+            if (stringEnum.hasOwnProperty(key)) {
+                result[key] = index++;
+            }
+        }
+        return Enum(result) as Record<keyof T, number>;
+    }
 }

@@ -44,7 +44,6 @@ export class SkillManager extends Component {
             })
 
             console.log(`加载技能:${this.skills}`)
-
         })
     }
 

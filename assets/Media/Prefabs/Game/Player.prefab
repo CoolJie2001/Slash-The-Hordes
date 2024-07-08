@@ -3938,7 +3938,7 @@
   },
   {
     "__type__": "SkillConfig",
-    "id": "1",
+    "id": 6,
     "prefab": {
       "__uuid__": "caed775b-1f5b-4679-bdfe-0bf6c92f7873",
       "__expectedType__": "cc.Prefab"
