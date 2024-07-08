@@ -1,0 +1,4 @@
+id,damage,cooldown,lifetime,level,describe,name,projectilesToSpawn,speed,wavesToShoot,wavesDelayMs
+HALO_PROJECTILE,4,10,2,1,以自己为中心朝各个方向发射一个火焰,火焰散弹枪,20,150,1,0
+HALO_PROJECTILE,6,10,2,2,伤害增加50%,火焰散弹枪,20,150,1,0
+HALO_PROJECTILE,8,10,2,3,伤害增加50%,火焰散弹枪,20,150,1,0

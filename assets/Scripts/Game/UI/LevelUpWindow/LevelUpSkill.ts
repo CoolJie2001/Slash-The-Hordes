@@ -16,9 +16,16 @@ export class LevelUpSkill extends Component {
 
     public init(skillType: UpgradeType, translationData: TranslationData): void {
         this.skillType = skillType;
-        this.skillTitle.string = `${translationData.GetTitle(skillType)}`;
-        this.skillDescription.string = `${translationData.GetDescribe(skillType)}`;
-        this.skillIcon.spriteFrame = AppRoot.Instance.GameAssets.UpgradeIcons.getIcon(skillType);
+        console.log(`显示技能${skillType}的选择UI.`)
+
+        const skillInfo = translationData.GetSkillInfo(skillType, 1)
+
+        if (skillInfo) {
+            this.skillTitle.string = `${skillInfo.Name}`;
+            this.skillDescription.string = `${skillInfo.Describe}`;
+            this.skillIcon.spriteFrame = AppRoot.Instance.GameAssets.UpgradeIcons.getIcon(skillType);
+        }
+
         this.node.on(NodeEventType.TOUCH_START, this.chooseSkill, this);
     }
 

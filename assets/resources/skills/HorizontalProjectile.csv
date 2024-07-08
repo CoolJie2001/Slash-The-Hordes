@@ -1,0 +1,4 @@
+id,damage,cooldown,lifetime,level,describe,name,projectilesToSpawn,speed,wavesToShoot,wavesDelayMs
+HORIZONTAL_PROJECTILE,4,4,3,1,"以自己为中心朝左右发射一个火焰","火焰标枪",20,300,1,120
+HORIZONTAL_PROJECTILE,6,4,3,2,"伤害增加50%","火焰标枪",20,300,1,120
+HORIZONTAL_PROJECTILE,8,4,3,3,"伤害增加50%","火焰标枪",20,300,1,120

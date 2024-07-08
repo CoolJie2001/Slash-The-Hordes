@@ -50,9 +50,13 @@ export class AppRoot extends Component {
     }
 
     public get TranslationData(): TranslationData {
-        let translationData = <TranslationData>this.engTranslationAsset.json;
+        // let translationData = <TranslationData>this.engTranslationAsset.json;
 
-     
+        let translationData = new TranslationData()
+
+        translationData.init('skills')
+
+        return translationData
     }
 
     public get ModalWindowManager(): ModalWindowManager {

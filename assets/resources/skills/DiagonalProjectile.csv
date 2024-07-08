@@ -1,0 +1,4 @@
+id,damage,cooldown,lifetime,level,describe,name,speed,wavesToShoot,wavesDelayMs
+DIAGONAL_PROJECTILE,2,4,0.02,1,"以你自己为中心, 以对角线方向发射出火焰对敌人造成伤害",交叉火焰,0.3,0,0.2
+DIAGONAL_PROJECTILE,3,4,0.02,1,攻击力增强50%,交叉火焰,0.3,0,0.2
+DIAGONAL_PROJECTILE,6,4,0.02,1,攻击力增强100%,交叉火焰,0.3,0,0.2

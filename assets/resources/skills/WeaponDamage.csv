@@ -1,0 +1,4 @@
+id,damage,batter,level,describe,name,collisionDelay,speed,regenerationDelay
+WEAPON_DAMAGE,2,1,1,加长武器的攻击长度,武器长度,0.5,100,5
+WEAPON_DAMAGE,4,1,2,攻击力增加100%,武器长度,0.5,100,5
+WEAPON_DAMAGE,8,2,3,攻击力增加100%,武器长度,0.5,100,5

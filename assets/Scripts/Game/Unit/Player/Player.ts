@@ -28,7 +28,7 @@ export class Player extends Component {
     private regeneration: PlayerRegeneration;
     private speed: number;
 
-    private dir: Vec2;
+    private dir: Vec2 = Vec2.ZERO;
 
     private isMoveAnimationPlaying = false;
 
@@ -78,10 +78,12 @@ export class Player extends Component {
     }
 
     public get CurrentForward(): number {
-        let angleRadians = Math.atan2(this.dir.y, this.dir.x);
+        if (this.dir) {
+            let angleRadians = Math.atan2(this.dir.y, this.dir.x);
 
-        if (angleRadians)
-            return misc.radiansToDegrees(angleRadians);
+            if (angleRadians)
+                return misc.radiansToDegrees(angleRadians);
+        }
 
         return 0
     }

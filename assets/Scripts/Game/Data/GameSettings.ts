@@ -1,5 +1,4 @@
 import { RotatingBladeLauncher } from "../Projectile/ProjectileLauncher/RotatingBladeLauncher";
-import { EnemyProjectileLauncher } from "../Unit/Enemy/ProjectileLauncher.cs/EnemyProjectileLauncher";
 
 export class GameSettings {
     public player: PlayerSettings = new PlayerSettings();
