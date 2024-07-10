@@ -1,0 +1,4 @@
+id,damage,cooldown,lifetime,level,describe,name
+REGENERATION,-1,1,5,1,"每秒恢复1点生命值, 技能释放后维持5秒",回复术
+REGENERATION,-5,1,6,2,"每秒恢复5点生命值, 技能释放后维持6秒",回复术
+REGENERATION,-10,1,7,3,"每秒恢复10点生命值, 技能释放后维持7秒",回复术

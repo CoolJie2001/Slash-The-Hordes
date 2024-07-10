@@ -1,7 +1,6 @@
 import { Enum } from "cc"
 
 export enum UpgradeType {
-    WeaponLength = "WEAPON_LENGTH",
     WeaponDamage = "WEAPON_DAMAGE",
     HorizontalProjectile = "HORIZONTAL_PROJECTILE",
     DiagonalProjectile = "DIAGONAL_PROJECTILE",

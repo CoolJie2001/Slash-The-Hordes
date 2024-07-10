@@ -5,6 +5,8 @@ import { GameTimer } from "../../../../Services/GameTimer";
 
 import { UpgradableCollider } from "./UpgradableCollider";
 import { Player } from "../Player";
+import { UpgradeType } from "../../../Upgrades/UpgradeType";
+import { AppRoot } from "../../../../AppRoot/AppRoot";
 const { ccclass, property } = _decorator;
 
 @ccclass("Weapon")
@@ -24,6 +26,8 @@ export class Weapon extends Component {
     private strikeState: AnimationState;
     private batter: number;
     private damage: number;
+
+    private currentWeaponLevel: number = 1
 
     private player: Player;
 
@@ -77,11 +81,13 @@ export class Weapon extends Component {
         return this.damage;
     }
 
-    public get WeaponNode() : Node {
+    public get WeaponNode(): Node {
         return this.weaponNode
     }
 
     public upgradeWeaponDamage(): void {
+        const weaponInfo = AppRoot.Instance.TranslationData.GetSkillInfo(UpgradeType.WeaponDamage, this.currentWeaponLevel)
+
         this.damage++;
     }
     public upgradeWeaponLength(): void {

@@ -21,7 +21,7 @@ export class Upgrader {
         private skillManager: SkillManager,
         settings: UpgradeSettings
     ) {
-        this.setTypeMaps(UpgradeType.WeaponLength, this.upgradeWeaponLength.bind(this), settings.maxWeaponLengthUpgrades);
+        // this.setTypeMaps(UpgradeType.WeaponLength, this.upgradeWeaponLength.bind(this), settings.maxWeaponLengthUpgrades);
         this.setTypeMaps(UpgradeType.WeaponDamage, this.upgradeWeaponDamage.bind(this), settings.maxWeaponDamageUpgrades);
         this.setTypeMaps(
             UpgradeType.HorizontalProjectile,
