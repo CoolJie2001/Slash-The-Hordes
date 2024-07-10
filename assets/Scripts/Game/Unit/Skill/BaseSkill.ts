@@ -1,21 +1,16 @@
-import { _decorator, BoxCollider2D, CCFloat, Collider2D, Component, Contact2DType, Enum, Node, sp, Vec3 } from 'cc';
-import { Player } from '../Player/Player';
+import { _decorator, CCFloat, Component, Enum, Vec3 } from 'cc';
 import { GameTimer } from '../../../Services/GameTimer';
-import { SkillUpgradeType, UpgradeType } from '../../Upgrades/UpgradeType';
+import { SkillUpgradeType } from '../../Upgrades/UpgradeType';
 const { ccclass, property } = _decorator;
 
 Enum(SkillUpgradeType)
 
 @ccclass('BaseSkill')
 export class BaseSkill extends Component {
-
-    @property(Player)
-    private player: Player
-
     private gameTimer: GameTimer
 
-    private currentLevel : number = 1
-    private maxLevel : number = 1
+    private currentLevel: number = 1
+    private maxLevel: number = 1
 
     /**
      * 技能每次碰撞伤害
@@ -48,11 +43,11 @@ export class BaseSkill extends Component {
         this.id = value
     }
 
-    
-    public get CurrentLevel() : number {
+
+    public get CurrentLevel(): number {
         return this.currentLevel
     }
-    
+
 
     public get Damage(): number {
         return this.damage
@@ -86,10 +81,10 @@ export class BaseSkill extends Component {
         this.isFire = value
     }
 
-    public get Level() : number {
+    public get Level(): number {
         return this.currentLevel
     }
-    
+
 
     public get SkillSettings(): any[] {
         return this.skillSettings

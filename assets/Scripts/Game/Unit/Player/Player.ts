@@ -7,8 +7,6 @@ import { Magnet } from "./Magnet";
 import { PlayerRegeneration } from "./PlayerRegeneration";
 import { PlayerUI } from "./PlayerUI/PlayerUI";
 import { Weapon } from "./Weapon/Weapon";
-import { AppRoot } from "../../../AppRoot/AppRoot";
-import { UpgradeType } from "../../Upgrades/UpgradeType";
 
 const { ccclass, property } = _decorator;
 

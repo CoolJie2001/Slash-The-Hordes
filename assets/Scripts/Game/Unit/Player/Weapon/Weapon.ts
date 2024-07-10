@@ -5,8 +5,8 @@ import { GameTimer } from "../../../../Services/GameTimer";
 
 import { UpgradableCollider } from "./UpgradableCollider";
 import { Player } from "../Player";
-import { UpgradeType } from "../../../Upgrades/UpgradeType";
 import { SkillManager } from "../../Skill/SkillManager";
+
 const { ccclass, property } = _decorator;
 
 @ccclass("Weapon")
@@ -86,10 +86,11 @@ export class Weapon extends Component {
     }
 
     public upgradeWeaponDamage(): void {
-        const weaponInfo = SkillManager. (UpgradeType.WeaponDamage, this.currentWeaponLevel)
+        const weaponInfo = SkillManager.Instance.upgrade("WEAPON_DAMAGE")
 
         this.damage++;
     }
+
     public upgradeWeaponLength(): void {
         this.upgradableCollider.upgrade();
     }

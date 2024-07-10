@@ -1,8 +1,9 @@
-import { _decorator, BoxCollider, BoxCollider2D, Component, instantiate, Node, Prefab, resources, TextAsset } from 'cc';
+import { _decorator, Component, instantiate, resources, TextAsset } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { CsvReader } from '../../../Services/Utils/CsvUtils';
 import { DebugNodeUtils } from '../../../Services/Utils/DebugNodeUtils';
 import { SkillConfig } from './SkillConfig';
+
 const { ccclass, property } = _decorator;
 
 /**
@@ -15,6 +16,16 @@ export class SkillManager extends Component {
     private skillConfigs: SkillConfig[] = []
 
     private skills: Map<string, BaseSkill> = new Map()
+
+    private static instance: SkillManager
+
+    public static Instance() {
+        return SkillManager.instance
+    }
+
+    awake() {
+        SkillManager.instance = this
+    }
 
     start() {
         this.loadSkills('skills')
@@ -53,7 +64,7 @@ export class SkillManager extends Component {
         })
     }
 
-    upgrade(name: string) {
+    public upgrade(name: string) {
         if (this.skills != null) {
             const skill = this.skills.get(name)
 
