@@ -14,6 +14,9 @@ export class BaseSkill extends Component {
 
     private gameTimer: GameTimer
 
+    private currentLevel : number = 1
+    private maxLevel : number = 1
+
     /**
      * 技能每次碰撞伤害
      */
@@ -44,6 +47,12 @@ export class BaseSkill extends Component {
     public set Id(value: string) {
         this.id = value
     }
+
+    
+    public get CurrentLevel() : number {
+        return this.currentLevel
+    }
+    
 
     public get Damage(): number {
         return this.damage
@@ -77,6 +86,11 @@ export class BaseSkill extends Component {
         this.isFire = value
     }
 
+    public get Level() : number {
+        return this.currentLevel
+    }
+    
+
     public get SkillSettings(): any[] {
         return this.skillSettings
     }
@@ -88,6 +102,10 @@ export class BaseSkill extends Component {
             const data = this.skillSettings[0]
 
             this.init(data.damage, data.cooldown, data.lifeTime)
+
+            this.skillSettings.forEach((value) => {
+                this.maxLevel = Math.max(this.maxLevel, value.level)
+            })
         }
 
         this.gameTimer = new GameTimer(this.cooldown)
@@ -97,7 +115,13 @@ export class BaseSkill extends Component {
      * 技能升级
      */
     public upgrade() {
+        if (this.skillSettings != null && this.skillSettings.length > 0) {
+            this.currentLevel++
 
+            if (this.currentLevel > this.maxLevel) {
+                this.currentLevel = this.maxLevel
+            }
+        }
     }
 
     protected init(damage: number, duration: number, lifeTime: number) {
