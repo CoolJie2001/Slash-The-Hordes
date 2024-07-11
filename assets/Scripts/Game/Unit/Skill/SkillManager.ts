@@ -17,14 +17,24 @@ export class SkillManager extends Component {
 
     private skills: Map<string, BaseSkill> = new Map()
 
-    private static instance: SkillManager
+    private static instance: SkillManager = null
 
-    public static Instance() {
+    public static get Instance(): SkillManager {
+        if (!SkillManager.instance) {
+            console.error('SkillManager instance is not created yet.')
+        }
+
         return SkillManager.instance
     }
 
-    awake() {
-        SkillManager.instance = this
+    onLoad() {
+        if (SkillManager.instance == null)
+            SkillManager.instance = this
+    }
+
+    protected onDestroy(): void {
+        if (SkillManager.instance === this)
+            SkillManager.instance = null
     }
 
     start() {

@@ -604,7 +604,7 @@
     "_overflow": 1,
     "_enableWrapText": true,
     "_font": {
-      "__uuid__": "f7f4e287-d4d8-44cd-8b28-44f6366c1bed",
+      "__uuid__": "43b967ea-f347-4552-ac2d-3d0d66c2594c",
       "__expectedType__": "cc.BitmapFont"
     },
     "_isSystemFontUsed": false,
@@ -905,7 +905,7 @@
     "_overflow": 1,
     "_enableWrapText": true,
     "_font": {
-      "__uuid__": "f7f4e287-d4d8-44cd-8b28-44f6366c1bed",
+      "__uuid__": "43b967ea-f347-4552-ac2d-3d0d66c2594c",
       "__expectedType__": "cc.BitmapFont"
     },
     "_isSystemFontUsed": false,

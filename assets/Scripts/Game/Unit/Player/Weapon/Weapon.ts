@@ -6,6 +6,7 @@ import { GameTimer } from "../../../../Services/GameTimer";
 import { UpgradableCollider } from "./UpgradableCollider";
 import { Player } from "../Player";
 import { SkillManager } from "../../Skill/SkillManager";
+import { UpgradeType } from "../../../Upgrades/UpgradeType";
 
 const { ccclass, property } = _decorator;
 
@@ -86,7 +87,7 @@ export class Weapon extends Component {
     }
 
     public upgradeWeaponDamage(): void {
-        const weaponInfo = SkillManager.Instance.upgrade("WEAPON_DAMAGE")
+        SkillManager.Instance.upgrade(UpgradeType.WeaponDamage)
 
         this.damage++;
     }
