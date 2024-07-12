@@ -3,6 +3,7 @@ import { BaseSkill } from './BaseSkill';
 import { CsvReader } from '../../../Services/Utils/CsvUtils';
 import { DebugNodeUtils } from '../../../Services/Utils/DebugNodeUtils';
 import { SkillConfig } from './SkillConfig';
+import { EnumUtils, UpgradeType } from '../../Upgrades/UpgradeType';
 
 const { ccclass, property } = _decorator;
 
@@ -90,7 +91,11 @@ export class SkillManager extends Component {
         let skill: BaseSkill = null
 
         this.skillConfigs.forEach((config, index) => {
-            if (config && config.id === data.id && config.prefab) {
+            const skillId = EnumUtils.getEnumIndex(UpgradeType, data.id)
+
+            console.log(config.id, `(${data.id}, ${skillId})`)
+
+            if (config && config.id === skillId && config.prefab) {
                 let skillPrefab = instantiate(config.prefab)
 
                 if (skillPrefab) {

@@ -16,7 +16,7 @@ export class UpgradeIcons extends Component {
     private typeToIcon = new Map<UpgradeType, SpriteFrame>();
 
     public init(): void {
-        this.typeToIcon.set(UpgradeType.WeaponLength, this.weaponLengthSprite);
+        // this.typeToIcon.set(UpgradeType.WeaponLength, this.weaponLengthSprite);
         this.typeToIcon.set(UpgradeType.WeaponDamage, this.weaponDamageSprite);
         this.typeToIcon.set(UpgradeType.HorizontalProjectile, this.horizontalProjectileSprite);
         this.typeToIcon.set(UpgradeType.DiagonalProjectile, this.diagonalProjectileSprite);

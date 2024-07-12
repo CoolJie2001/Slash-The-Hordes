@@ -5,6 +5,7 @@ import { delay } from "../../../Services/Utils/AsyncUtils";
 import { TranslationData } from "../../Data/TranslationData";
 import { UpgradeType } from "../../Upgrades/UpgradeType";
 import { LevelUpSkill } from "./LevelUpSkill";
+import { SkillManager } from "../../Unit/Skill/SkillManager";
 
 const { ccclass, property } = _decorator;
 
@@ -33,6 +34,8 @@ export class LevelUpModalWindow extends ModalWindow<LevelUpModalWindowParams, Up
     }
 
     private chooseSkill(upgradeType: UpgradeType): void {
+        SkillManager.Instance.upgrade(upgradeType)
+
         this.dismiss(upgradeType);
     }
 }

@@ -1,16 +1,12 @@
-import { _decorator, Component, Enum, Node, Prefab } from 'cc';
-import { EnumUtils, UpgradeType } from '../../Upgrades/UpgradeType';
+import { _decorator, Prefab } from 'cc';
+import { SkillUpgradeType } from '../../Upgrades/UpgradeType';
 const { ccclass, property } = _decorator;
-
-const UpgradeTypeEnum = EnumUtils.createEnumFromStringEnum(UpgradeType)
 
 @ccclass('SkillConfig')
 export class SkillConfig {
-    @property({type: UpgradeTypeEnum })
-    public id: keyof typeof UpgradeTypeEnum = 'RotatingBlade'
+    @property({ type: SkillUpgradeType })
+    public id: SkillUpgradeType
 
     @property(Prefab)
     public prefab: Prefab
 }
-
-

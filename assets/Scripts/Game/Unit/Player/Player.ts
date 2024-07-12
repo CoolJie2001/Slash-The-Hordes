@@ -7,6 +7,7 @@ import { Magnet } from "./Magnet";
 import { PlayerRegeneration } from "./PlayerRegeneration";
 import { PlayerUI } from "./PlayerUI/PlayerUI";
 import { Weapon } from "./Weapon/Weapon";
+import { BaseSkill } from "../Skill/BaseSkill";
 
 const { ccclass, property } = _decorator;
 
@@ -32,11 +33,17 @@ export class Player extends Component {
 
     private isMoveAnimationPlaying = false;
 
+    /**
+     * 玩家当前拥有的技能集合
+     */
+    private skills: Map<string, BaseSkill> = new Map()
+
     public init(input: IInput, data: PlayerData): void {
         this.input = input;
         this.health = new UnitHealth(data.maxHp);
         this.level = new UnitLevel(data.requiredXP, data.xpMultiplier);
-        this.regeneration = new PlayerRegeneration(this.health, data.regenerationDelay);
+
+        this.regeneration = new PlayerRegeneration(this.health);
         this.speed = data.speed;
 
         this.weapon.init(data.strikeDelay, data.damage, data.batter, this);

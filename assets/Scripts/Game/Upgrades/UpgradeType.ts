@@ -22,10 +22,14 @@ export enum MetaUpgradeType {
  * 允许升级的技能类别
  */
 export enum SkillUpgradeType {
+
+
+    Regeneration = 4,
+
     /**
      * 旋风刃技能
      */
-    RotatingBlade = 1
+    RotatingBlade = 5,
 }
 
 export class EnumUtils {
@@ -39,5 +43,11 @@ export class EnumUtils {
             }
         }
         return Enum(result) as Record<keyof T, number>;
+    }
+
+    public static getEnumIndex<T extends { [key: string]: string }>(enumType: T, value: string): number {
+        const enumValue = Object.values(enumType)
+
+        return enumValue.indexOf(value)
     }
 }
