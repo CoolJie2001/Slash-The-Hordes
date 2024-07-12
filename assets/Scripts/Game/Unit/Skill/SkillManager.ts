@@ -3,12 +3,12 @@ import { BaseSkill } from './BaseSkill';
 import { CsvReader } from '../../../Services/Utils/CsvUtils';
 import { DebugNodeUtils } from '../../../Services/Utils/DebugNodeUtils';
 import { SkillConfig } from './SkillConfig';
-import { EnumUtils, UpgradeType } from '../../Upgrades/UpgradeType';
+import { EnumUtils, SkillUpgradeType, UpgradeType } from '../../Upgrades/UpgradeType';
 
 const { ccclass, property } = _decorator;
 
 /**
- * 管理当前玩家的技能类
+ * 管理当前玩家所有能掌握的技能的管理器类
  */
 @ccclass('SkillManager')
 export class SkillManager extends Component {
@@ -91,7 +91,7 @@ export class SkillManager extends Component {
         let skill: BaseSkill = null
 
         this.skillConfigs.forEach((config, index) => {
-            const skillId = EnumUtils.getEnumIndex(UpgradeType, data.id)
+            const skillId : SkillUpgradeType = Number(data.id)
 
             console.log(config.id, `(${data.id}, ${skillId})`)
 

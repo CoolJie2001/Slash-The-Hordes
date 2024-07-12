@@ -22,8 +22,22 @@ export enum MetaUpgradeType {
  * 允许升级的技能类别
  */
 export enum SkillUpgradeType {
+    /**
+     * 飞行标枪
+     */
+    HorizontalProjectile = 1,
+    /**
+     * 交叉火焰
+     */
+    DiagonalProjectile = 2,
+    /**
+     * 火焰散弹枪
+     */
+    HaloProjectile = 3,
 
-
+    /**
+     * 回复术
+     */
     Regeneration = 4,
 
     /**
@@ -44,6 +58,17 @@ export class EnumUtils {
         }
         return Enum(result) as Record<keyof T, number>;
     }
+
+    /**
+     * 获取枚举值在枚举类型中定义的名称字符串
+     * @param enumType 枚举类型
+     * @param value 枚举值
+     * @returns 返回枚举值在枚举类型中定义的名称字符串
+     */
+    public static getEnumName(enumType: any, value : number) : string | undefined {
+        return enumType[value]
+    }
+
 
     public static getEnumIndex<T extends { [key: string]: string }>(enumType: T, value: string): number {
         const enumValue = Object.values(enumType)

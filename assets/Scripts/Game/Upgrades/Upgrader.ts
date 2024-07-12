@@ -81,7 +81,8 @@ export class Upgrader {
     }
 
     private upgradeRegeneration(): void {
-        this.player.Regeneration.upgrade();
+        // this.player.Regeneration.upgrade();
+        this.player.SkillManager.upgrade(UpgradeType.Regeneration)
     }
 
     private upgradeRotatingBladeLauncher(): void {

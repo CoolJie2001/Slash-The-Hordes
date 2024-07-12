@@ -8,6 +8,7 @@ import { PlayerRegeneration } from "./PlayerRegeneration";
 import { PlayerUI } from "./PlayerUI/PlayerUI";
 import { Weapon } from "./Weapon/Weapon";
 import { BaseSkill } from "../Skill/BaseSkill";
+import { SkillManager } from "../Skill/SkillManager";
 
 const { ccclass, property } = _decorator;
 
@@ -21,7 +22,11 @@ export class Player extends Component {
     @property(Animation) private animation: Animation;
     @property(Sprite) private sprite: Sprite;
 
-    @property(Node) private skillNode: Node
+    /**
+     * 玩家当前能够使用的所有技能管理类
+     * 把玩家能使用的类都纳入进该类进行管理.
+     */
+    @property(SkillManager) private skillManager: SkillManager
 
     private input: IInput;
     private health: UnitHealth;
@@ -32,11 +37,6 @@ export class Player extends Component {
     private dir: Vec2 = Vec2.ZERO;
 
     private isMoveAnimationPlaying = false;
-
-    /**
-     * 玩家当前拥有的技能集合
-     */
-    private skills: Map<string, BaseSkill> = new Map()
 
     public init(input: IInput, data: PlayerData): void {
         this.input = input;
@@ -80,8 +80,8 @@ export class Player extends Component {
         return this.dir;
     }
 
-    public get SkillNode(): Node {
-        return this.skillNode
+    public get SkillManager(): SkillManager {
+        return this.skillManager
     }
 
     public get CurrentForward(): number {
@@ -100,6 +100,7 @@ export class Player extends Component {
         this.weapon.gameTick(deltaTime);
         this.magnet.gameTick(deltaTime);
         this.regeneration.gameTick(deltaTime);
+        this.skillManager.gameTick(deltaTime)
     }
 
     private move(deltaTime: number): void {

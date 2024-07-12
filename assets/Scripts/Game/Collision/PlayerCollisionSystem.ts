@@ -25,6 +25,7 @@ export class PlayerCollisionSystem {
 
         this.collisionTimer = new GameTimer(collisionDelay);
 
+        // 玩家可以碰撞的GroupType是下面三种
         this.groupToResolver.set(GroupType.ENEMY, this.resolveEnemyContact.bind(this));
         this.groupToResolver.set(GroupType.ENEMY_PROJECTILE, this.resolveEnemyProjectileContact.bind(this));
         this.groupToResolver.set(GroupType.ITEM, this.resolveItemContact.bind(this));
@@ -33,6 +34,7 @@ export class PlayerCollisionSystem {
     public gameTick(deltaTime: number): void {
         this.collisionTimer.gameTick(deltaTime);
         if (this.collisionTimer.tryFinishPeriod()) {
+            // 定时检查当前屏幕上所有的碰撞体与玩家的碰撞情况
             this.resolveAllContacts();
         }
     }
@@ -54,6 +56,7 @@ export class PlayerCollisionSystem {
     }
 
     private resolveAllContacts(): void {
+        // 这里面是把仍然和玩家接触碰撞的碰撞体连续触发与玩家的碰撞, 执行对应的碰撞策略
         for (let i = 0; i < this.playerContacts.length; i++) {
             this.resolveContact(this.playerContacts[i]);
         }
@@ -85,6 +88,7 @@ export class PlayerCollisionSystem {
     }
 
     private resolveItemContact(xpCollider: Collider2D): void {
+        // 这里认为玩家拾取的都是经验道具
         this.itemManager.pickupItem(xpCollider.node.getComponent(Item));
     }
 }
