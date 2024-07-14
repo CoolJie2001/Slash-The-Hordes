@@ -1,6 +1,7 @@
 import { _decorator, CCFloat, Component, Enum, Vec3 } from 'cc';
 import { GameTimer } from '../../../Services/GameTimer';
 import { SkillUpgradeType } from '../../Upgrades/UpgradeType';
+import { SkillLevel } from './SkillLevel';
 const { ccclass, property } = _decorator;
 
 Enum(SkillUpgradeType)
@@ -9,7 +10,7 @@ Enum(SkillUpgradeType)
 export class BaseSkill extends Component {
     private gameTimer: GameTimer
 
-    private currentLevel: number = 1
+    private currentLevel: number = 0
     private maxLevel: number = 1
 
     /**
@@ -29,7 +30,7 @@ export class BaseSkill extends Component {
     @property(CCFloat)
     private lifeTime: number = 2
 
-    private skillSettings: any[]
+    private skillSettings: SkillLevel[]
 
     private isFire: boolean = false
 
@@ -86,24 +87,24 @@ export class BaseSkill extends Component {
     }
 
 
-    public get SkillSettings(): any[] {
+    public get SkillSettings(): SkillLevel[] {
         return this.skillSettings
     }
 
-    public setup(skillSetting: any[]) {
+    public setup(skillSetting: SkillLevel[]) {
         this.skillSettings = skillSetting
 
         if (this.skillSettings.length > 0) {
             const data = this.skillSettings[0]
 
-            this.init(data.damage, data.cooldown, data.lifeTime)
+            this.Id = data.id
+
+            this.init(0, 0, 0)
 
             this.skillSettings.forEach((value) => {
                 this.maxLevel = Math.max(this.maxLevel, value.level)
             })
         }
-
-        this.gameTimer = new GameTimer(this.cooldown)
     }
 
     /**
@@ -115,6 +116,14 @@ export class BaseSkill extends Component {
 
             if (this.currentLevel > this.maxLevel) {
                 this.currentLevel = this.maxLevel
+            }
+
+            const setting = this.skillSettings[this.currentLevel - 1]
+
+            if (setting) {
+                this.init(Number(setting.damage), Number(setting.cooldown), Number(setting.lifetime))
+
+                this.gameTimer = new GameTimer(this.cooldown)
             }
         }
     }
@@ -128,10 +137,12 @@ export class BaseSkill extends Component {
     }
 
     public gameTick(deltaTime: number): void {
-        if (!this.IsFire) {
+        // 当前没有释放技能, 则判断gameTimer的冷却时间是否完成技能冷却
+        if (!this.IsFire && this.currentLevel > 0) {
             this.gameTimer.gameTick(deltaTime)
 
             if (this.gameTimer.tryFinishPeriod()) {
+                // 技能冷却后, 释放技能
                 this.fire(this.node.position)
             }
         }

@@ -1,6 +1,6 @@
 import { resources, TextAsset } from "cc";
 import { SkillInfo } from "../Unit/Skill/Settings/SkillInfo";
-import { UpgradeType } from "../Upgrades/UpgradeType";
+import { EnumUtils, UpgradeType } from "../Upgrades/UpgradeType";
 import { CsvReader } from "../../Services/Utils/CsvUtils";
 
 export class TranslationData {
@@ -25,7 +25,7 @@ export class TranslationData {
 
                 if (skillSetting.length) {
                     const skillInfo = skillSetting.map((value, index) => {
-                        return new SkillInfo(value.id, value.name, value.describe, value.level) 
+                        return new SkillInfo(value.id, value.name, value.describe, value.level)
                     })
 
                     if (skillInfo.length > 0) {
@@ -42,8 +42,12 @@ export class TranslationData {
      * @param level 指定的技能等级
      * @returns 返回指定技能Id等级的技能信息
      */
-    public GetSkillInfo(id: string, level: number): SkillInfo | null {
-        const skillInfo = this.skillInfoMap.get(id)
+    public GetSkillInfo(id: UpgradeType, level: number): SkillInfo | null {
+        const skillUpgradeType = EnumUtils.convertUpgradeTypeToSkillUpgradeType(id)
+
+        const idValue = String(skillUpgradeType)
+
+        const skillInfo = this.skillInfoMap.get(idValue)
 
         if (skillInfo) {
             for (let i = 0; i < skillInfo.length; i++) {

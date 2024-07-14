@@ -39,6 +39,7 @@ export class SkillManager extends Component {
     }
 
     start() {
+        this.skills.clear()
         this.loadSkills('skills')
     }
 
@@ -75,9 +76,11 @@ export class SkillManager extends Component {
         })
     }
 
-    public upgrade(name: string) {
+    public upgrade(name: UpgradeType) {
         if (this.skills != null) {
-            const skill = this.skills.get(name)
+            const skillUpgradeType = EnumUtils.convertUpgradeTypeToSkillUpgradeType(name)
+
+            const skill = this.skills.get(String(Number(skillUpgradeType)))
 
             if (skill) {
                 skill.upgrade()
@@ -91,11 +94,11 @@ export class SkillManager extends Component {
         let skill: BaseSkill = null
 
         this.skillConfigs.forEach((config, index) => {
-            const skillId : SkillUpgradeType = Number(data.id)
-
-            console.log(config.id, `(${data.id}, ${skillId})`)
+            const skillId: SkillUpgradeType = Number(data.id)
 
             if (config && config.id === skillId && config.prefab) {
+                console.log(`配置Id:${config.id}, 技能Id:${skillId}`)
+
                 let skillPrefab = instantiate(config.prefab)
 
                 if (skillPrefab) {

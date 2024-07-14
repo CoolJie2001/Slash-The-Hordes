@@ -35,7 +35,7 @@ export class VirtualJoystic extends Component implements IInput {
     }
 
     private activateMouseJoystic(e: EventMouse): void {
-        console.log(e.getUILocation());
+        // console.log(e.getUILocation());
         this.activateJoystic(e.getUILocation());
     }
 

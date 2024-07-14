@@ -1,9 +1,10 @@
-import { _decorator, ParticleSystem2D } from 'cc';
+import { _decorator, math, ParticleSystem2D } from 'cc';
 import { BaseSkill } from './BaseSkill';
 import { RegenerationSetting } from './Settings/RegenerationSetting';
 import { PlayerRegeneration } from '../Player/PlayerRegeneration';
 import { UnitHealth } from '../UnitHealth';
 import { Player } from '../Player/Player';
+import { Game } from '../../Game';
 const { ccclass, property } = _decorator;
 
 /**
@@ -23,24 +24,27 @@ export class RegenerationSkill extends BaseSkill {
 
     private regeneration: PlayerRegeneration
 
-    public get RegenerationSettings(): RegenerationSetting[] {
-        return this.SkillSettings
-    }
-
     start() {
-        if (this.player) {
-            this.healthUnit = this.player.Health
-        }
+
     }
 
     public getCurrentSkillSetting(): RegenerationSetting {
-        if (this.RegenerationSettings && this.RegenerationSettings.length >= this.CurrentLevel) {
-            return this.RegenerationSettings[this.CurrentLevel - 1]
+        if (this.SkillSettings && this.SkillSettings.length >= this.CurrentLevel) {
+            return this.SkillSettings[this.CurrentLevel - 1] as RegenerationSetting
         }
     }
 
     protected override init(damage: number, duration: number, lifeTime: number): void {
         super.init(damage, duration, lifeTime)
+
+        if (this.player == null) {
+            this.player = Game.Instance.Player
+        }
+
+        if (this.player) {
+            this.healthUnit = this.player.Health
+            console.log(`${this.node.name}----初始化玩家HealthUnit成功.`)
+        }
 
         this.regeneration = new PlayerRegeneration(this.healthUnit)
     }
@@ -50,20 +54,53 @@ export class RegenerationSkill extends BaseSkill {
 
         const setting = this.getCurrentSkillSetting()
 
-        this.regeneration.SingleRecoveryHealth = setting.Damage
+        this.regeneration.SingleRecoveryHealth = Number(setting.damage)
         this.regeneration.upgrade()
     }
 
-    update(deltaTime: number) {
-        if (this.elapsedTime < this.LifeTime) {
-            this.elapsedTime += deltaTime
-        } else {
-            this.elapsedTime = 0
+    public override gameTick(deltaTime: number): void {
+        super.gameTick(deltaTime)
 
-            this.node.active = false
+        if (this.IsFire) {
+            // 判断释放技能后, 技能的LifeTime
 
-            this.IsFire = false
+            if (this.elapsedTime < this.LifeTime) {
+                this.elapsedTime += deltaTime
+
+                if (this.regeneration) {
+                    this.regeneration.gameTick(deltaTime)
+                }
+            } else {
+                // 技能LifeTime到期
+                this.elapsedTime = 0
+
+                this.node.active = false
+
+                this.IsFire = false
+
+                this.disableParticleNode()
+            }
         }
+    }
+
+    enableParticleNode() {
+        if (this.regenerationParticle) {
+            this.regenerationParticle.node.active = true
+
+            this.regenerationParticle.resetSystem()
+        }
+    }
+
+    disableParticleNode() {
+        if (this.regenerationParticle) {
+            this.regenerationParticle.node.active = false
+        }
+    }
+
+    override fire(startPosition: math.Vec3): void {
+        super.fire(startPosition)
+
+        this.enableParticleNode()
     }
 }
 
