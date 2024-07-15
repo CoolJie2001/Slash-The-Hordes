@@ -1,4 +1,4 @@
-import { _decorator, CCFloat, CCInteger, Color, Component, Label, Node, tween, UIOpacity, Vec3 } from 'cc';
+import { _decorator, CCFloat, CCInteger, Color, Component, Label, Node, tween, UIOpacity, v3, Vec3 } from 'cc';
 const { ccclass, property } = _decorator;
 
 /**
@@ -30,6 +30,7 @@ export class DamageSkipping extends Component {
     /**
      * 显示伤害跳字的玩家节点
      */
+    @property(Node)
     private displayPlayer: Node
 
     /**
@@ -111,30 +112,46 @@ export class DamageSkipping extends Component {
         this.node.setPosition(this.displayPlayer.position);
 
         // 计算动画目标位置
-        const startPosition = new Vec3(this.displayPlayer.position.x, this.displayPlayer.position.y, this.displayPlayer.position.z);
+        const startPosition = v3(0, 0, 0)
         const targetPosition = new Vec3(startPosition.x + this.forceIntensity, startPosition.y + this.forceIntensity + 100, startPosition.z);
 
         const opacityNode = this.node.children[0].getComponent(UIOpacity)
 
-        // 创建跳字动画
-        tween(this.node)
-            .to(this.displayDuration / 1000, { position: targetPosition }, {
-                easing: 'sineOut',
-                onUpdate: (target, ratio) => {
-                    // 设置伤害跳字的透明度随动画进展而减少
-                    opacityNode.opacity = 255 * (1 - ratio);
-                }
-            })
+        // // 创建跳字动画
+        // tween(this.node)
+        //     .to(this.displayDuration / 1000, { position: targetPosition }, {
+        //         easing: 'sineOut',
+        //         onUpdate: (target, ratio) => {
+        //             // 设置伤害跳字的透明度随动画进展而减少
+        //             opacityNode.opacity = 255 * (1 - ratio);
+        //         }
+        //     })
+        //     .call(() => {
+        //         // 动画结束后销毁节点
+        //         // this.node.destroy();
+        //     })
+        //     .start();
+
+        const obj = {
+            p: startPosition
+        }
+
+        tween(obj)
+            .to(this.displayDuration / 1000, { p: targetPosition },
+                {
+                    easing: 'sineOut',
+                    onUpdate: (target, ratio) => {
+                        this.node.position = obj.p
+
+                        opacityNode.opacity = 255 * (1 - ratio);
+                    }
+                })
             .call(() => {
-                // 动画结束后销毁节点
-                // this.node.destroy();
+                this.node.destroy()
             })
             .start();
     }
 
-    update(deltaTime: number) {
-
-    }
 }
 
 

@@ -142,10 +142,14 @@ export class Player extends Component {
     }
 
     private async animateHpChange(hpChange: number): Promise<void> {
+        let damageColor = Color.WHITE
+
         if (hpChange < 0) {
             this.sprite.color = Color.RED;
+            damageColor = Color.RED
         } else {
             this.sprite.color = Color.GREEN;
+            damageColor = Color.GREEN
         }
 
         await delay(100);
@@ -153,10 +157,8 @@ export class Player extends Component {
 
         let damageNode = instantiate(this.damageSkipping)
         let skipping = damageNode.getComponent(DamageSkipping)
-        skipping.init(this.node, hpChange, Color.YELLOW)
+        skipping.init(this.node, hpChange, damageColor)
         this.playerUI.node.addChild(damageNode)
-
-        DebugNodeUtils.DebugOutputNode('', this.playerUI.node)
 
         if (!this.health.IsAlive) {
             this.animation.play("Die");
