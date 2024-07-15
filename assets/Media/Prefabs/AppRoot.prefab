@@ -25,17 +25,17 @@
         "__id__": 14
       },
       {
-        "__id__": 70
+        "__id__": 74
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 78
+        "__id__": 82
       }
     ],
     "_prefab": {
-      "__id__": 80
+      "__id__": 84
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -337,17 +337,17 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 63
-      },
-      {
-        "__id__": 65
-      },
-      {
         "__id__": 67
+      },
+      {
+        "__id__": 69
+      },
+      {
+        "__id__": 71
       }
     ],
     "_prefab": {
-      "__id__": 69
+      "__id__": 73
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -395,16 +395,19 @@
       },
       {
         "__id__": 50
+      },
+      {
+        "__id__": 60
       }
     ],
     "_active": true,
     "_components": [
       {
-        "__id__": 60
+        "__id__": 64
       }
     ],
     "_prefab": {
-      "__id__": 62
+      "__id__": 66
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -1408,6 +1411,94 @@
     "nestedPrefabInstanceRoots": null
   },
   {
+    "__type__": "cc.Node",
+    "_name": "DamageLayer",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "_parent": {
+      "__id__": 15
+    },
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 61
+      }
+    ],
+    "_prefab": {
+      "__id__": 63
+    },
+    "_lpos": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_lrot": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_lscale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_mobility": 0,
+    "_layer": 1073741824,
+    "_euler": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.UITransform",
+    "_name": "",
+    "_objFlags": 0,
+    "__editorExtras__": {},
+    "node": {
+      "__id__": 60
+    },
+    "_enabled": true,
+    "__prefab": {
+      "__id__": 62
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 100,
+      "height": 100
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_id": ""
+  },
+  {
+    "__type__": "cc.CompPrefabInfo",
+    "fileId": "50Kb7UGopIN7Ly8+VhDTHq"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__id__": 0
+    },
+    "fileId": "79ksWfEZtFJbEjPn1YXRa2",
+    "instance": null,
+    "targetOverrides": null,
+    "nestedPrefabInstanceRoots": null
+  },
+  {
     "__type__": "cc.Camera",
     "_name": "",
     "_objFlags": 0,
@@ -1417,7 +1508,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 61
+      "__id__": 65
     },
     "_projection": 0,
     "_priority": 1073741824,
@@ -1482,7 +1573,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 64
+      "__id__": 68
     },
     "_contentSize": {
       "__type__": "cc.Size",
@@ -1510,10 +1601,10 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 66
+      "__id__": 70
     },
     "_cameraComponent": {
-      "__id__": 60
+      "__id__": 64
     },
     "_alignCanvasWithScreen": true,
     "_id": ""
@@ -1532,7 +1623,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 68
+      "__id__": 72
     },
     "_alignFlags": 45,
     "_target": null,
@@ -1578,14 +1669,14 @@
       "__id__": 1
     },
     "_prefab": {
-      "__id__": 71
+      "__id__": 75
     },
     "__editorExtras__": {}
   },
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 70
+      "__id__": 74
     },
     "asset": {
       "__uuid__": "f668086a-2bff-40eb-a029-dd891718441d",
@@ -1593,7 +1684,7 @@
     },
     "fileId": "5da9o8mwlJl5XD861jGbYx",
     "instance": {
-      "__id__": 72
+      "__id__": 76
     },
     "targetOverrides": null
   },
@@ -1607,16 +1698,16 @@
     "mountedComponents": [],
     "propertyOverrides": [
       {
-        "__id__": 73
-      },
-      {
-        "__id__": 75
-      },
-      {
-        "__id__": 76
-      },
-      {
         "__id__": 77
+      },
+      {
+        "__id__": 79
+      },
+      {
+        "__id__": 80
+      },
+      {
+        "__id__": 81
       }
     ],
     "removedComponents": []
@@ -1624,7 +1715,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 74
+      "__id__": 78
     },
     "propertyPath": [
       "_name"
@@ -1640,7 +1731,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 74
+      "__id__": 78
     },
     "propertyPath": [
       "_lpos"
@@ -1655,7 +1746,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 74
+      "__id__": 78
     },
     "propertyPath": [
       "_lrot"
@@ -1671,7 +1762,7 @@
   {
     "__type__": "CCPropertyOverrideInfo",
     "targetInfo": {
-      "__id__": 74
+      "__id__": 78
     },
     "propertyPath": [
       "_euler"
@@ -1693,7 +1784,7 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 79
+      "__id__": 83
     },
     "audio": {
       "__id__": 11
@@ -1711,7 +1802,7 @@
       "__expectedType__": "cc.Prefab"
     },
     "mainCamera": {
-      "__id__": 60
+      "__id__": 64
     },
     "modalWindowManager": {
       "__id__": 19
@@ -1720,6 +1811,9 @@
       "__id__": 55
     },
     "y8": null,
+    "damageLayer": {
+      "__id__": 60
+    },
     "_id": ""
   },
   {
@@ -1738,29 +1832,29 @@
     "instance": null,
     "targetOverrides": [
       {
-        "__id__": 81
+        "__id__": 85
       }
     ],
     "nestedPrefabInstanceRoots": [
       {
-        "__id__": 70
+        "__id__": 74
       }
     ]
   },
   {
     "__type__": "cc.TargetOverrideInfo",
     "source": {
-      "__id__": 78
+      "__id__": 82
     },
     "sourceInfo": null,
     "propertyPath": [
       "y8"
     ],
     "target": {
-      "__id__": 70
+      "__id__": 74
     },
     "targetInfo": {
-      "__id__": 82
+      "__id__": 86
     }
   },
   {

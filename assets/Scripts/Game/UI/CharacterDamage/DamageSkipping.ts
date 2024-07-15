@@ -1,4 +1,5 @@
-import { _decorator, CCFloat, CCInteger, Color, Component, Label, Node, tween, UIOpacity, v3, Vec3 } from 'cc';
+import { _decorator, CCFloat, CCInteger, Color, Component, Label, Node, tween, UIOpacity, UITransform, v3, Vec3 } from 'cc';
+import { AppRoot } from '../../../AppRoot/AppRoot';
 const { ccclass, property } = _decorator;
 
 /**
@@ -32,6 +33,12 @@ export class DamageSkipping extends Component {
      */
     @property(Node)
     private displayPlayer: Node
+
+    /**
+     * 伤害跳字的根节点层
+     */
+    @property(Node)
+    private damageLayer : Node
 
     /**
      * 获取跳字玩家节点
@@ -91,25 +98,39 @@ export class DamageSkipping extends Component {
 
     /**
      * 初始化飘字组件
+     * @param layer 显示飘字的根节点
      * @param playerNode 显示飘字的玩家节点
      * @param damage 伤害值
      * @param color 飘字颜色
      */
-    public init(playerNode: Node, damage: number, color: Color) {
+    public init(layer : Node, playerNode: Node, damage: number, color: Color) {
+        this.damageLayer = layer
         this.DisplayPlayerNode = playerNode
         this.number.string = String(damage)
         this.DisplayColor = color
+
+        if (layer) {
+            this.damageLayer.addChild(this.node)
+        }
     }
 
     start() {
         // 确保 number 和 displayPlayer 都已经设置
-        if (!this.number || !this.displayPlayer) {
+        if (!this.number || !this.displayPlayer || !this.damageLayer) {
             console.error('Number label or display player node not set.');
             return;
         }
 
         // 将伤害跳字节点设置到 displayPlayer 的位置
-        this.node.setPosition(this.displayPlayer.position);
+        const worldPosition = this.displayPlayer.position
+        const uiTransform = AppRoot.Instance.MainCamera.node.parent.getComponent(UITransform)
+        const uiPosition = uiTransform.convertToNodeSpaceAR(worldPosition)
+
+        this.node.setPosition(uiPosition);
+
+        console.log(`${this.displayPlayer.name}----${worldPosition}, uipos: ${uiPosition}`)
+
+        return
 
         // 计算动画目标位置
         const startPosition = v3(0, 0, 0)
@@ -147,6 +168,7 @@ export class DamageSkipping extends Component {
                     }
                 })
             .call(() => {
+                this.node.parent.removeChild(this.node)
                 this.node.destroy()
             })
             .start();

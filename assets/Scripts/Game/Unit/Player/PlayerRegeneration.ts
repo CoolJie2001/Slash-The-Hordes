@@ -1,4 +1,5 @@
 import { GameTimer } from "../../../Services/GameTimer";
+import { DateUtils } from "../../../Services/Utils/DateUtils";
 import { UnitHealth } from "../UnitHealth";
 
 /**
@@ -42,14 +43,21 @@ export class PlayerRegeneration {
 
     }
 
-    public gameTick(deltaTime: number): void {
-        if (this.singleRecoveryHealth <= 0) return;
+    public gameTick(deltaTime: number): boolean {
+        if (this.singleRecoveryHealth <= 0) return false;
 
         this.regenerationTimer.gameTick(deltaTime);
 
         if (this.regenerationTimer.tryFinishPeriod()) {
             // 每秒恢复
             this.health.heal(this.SingleRecoveryHealth);
+
+            let date = new Date()
+            console.log(`${DateUtils.formatDate(date, "HH:mm:ss:SSS")}----回血:${this.singleRecoveryHealth}`)
+
+            return true
         }
+
+        return false
     }
 }

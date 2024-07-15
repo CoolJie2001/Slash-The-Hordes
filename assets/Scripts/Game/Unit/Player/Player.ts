@@ -11,6 +11,7 @@ import { BaseSkill } from "../Skill/BaseSkill";
 import { SkillManager } from "../Skill/SkillManager";
 import { DamageSkipping } from "../../UI/CharacterDamage/DamageSkipping";
 import { DebugNodeUtils } from "../../../Services/Utils/DebugNodeUtils";
+import { AppRoot } from "../../../AppRoot/AppRoot";
 
 const { ccclass, property } = _decorator;
 
@@ -157,8 +158,7 @@ export class Player extends Component {
 
         let damageNode = instantiate(this.damageSkipping)
         let skipping = damageNode.getComponent(DamageSkipping)
-        skipping.init(this.node, hpChange, damageColor)
-        this.playerUI.node.addChild(damageNode)
+        skipping.init(AppRoot.Instance.DamageLayer, this.node, hpChange, damageColor)
 
         if (!this.health.IsAlive) {
             this.animation.play("Die");

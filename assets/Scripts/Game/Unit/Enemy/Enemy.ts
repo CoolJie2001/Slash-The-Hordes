@@ -1,10 +1,13 @@
-import { BoxCollider2D, Component, Material, randomRange, Sprite, Vec3, _decorator, Vec2 } from "cc";
+import { BoxCollider2D, Component, Material, randomRange, Sprite, Vec3, _decorator, Vec2, Prefab, instantiate, Color } from "cc";
 import { ISignal } from "../../../Services/EventSystem/ISignal";
 import { Signal } from "../../../Services/EventSystem/Signal";
 import { delay } from "../../../Services/Utils/AsyncUtils";
 import { EnemySettings } from "../../Data/GameSettings";
 import { UnitHealth } from "../UnitHealth";
 import { EnemyMovementType } from "./EnemyMovementType";
+import { DamageSkipping } from "../../UI/CharacterDamage/DamageSkipping";
+import { Game } from "../../Game";
+import { AppRoot } from "../../../AppRoot/AppRoot";
 
 const { ccclass, property } = _decorator;
 
@@ -14,6 +17,8 @@ export class Enemy extends Component {
     @property(Sprite) private sprite: Sprite;
     @property(Material) private defaultMaterial: Material;
     @property(Material) private whiteMaterial: Material;
+
+    @property(Prefab) private damageSkipping : Prefab
 
     private deathEvent: Signal<Enemy> = new Signal<Enemy>();
     private lifetimeEndedEvent: Signal<Enemy> = new Signal<Enemy>();
@@ -116,6 +121,11 @@ export class Enemy extends Component {
 
     public dealDamage(points: number): void {
         this.health.damage(points);
+
+        let damageNode = instantiate(this.damageSkipping)
+        let skipping = damageNode.getComponent(DamageSkipping)
+        skipping.init(AppRoot.Instance.DamageLayer, this.node, points, Color.RED)
+
         if (!this.health.IsAlive) {
             this.deathEvent.trigger(this);
         }

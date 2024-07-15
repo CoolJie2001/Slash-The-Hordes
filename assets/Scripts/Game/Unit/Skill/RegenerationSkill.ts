@@ -68,7 +68,9 @@ export class RegenerationSkill extends BaseSkill {
                 this.elapsedTime += deltaTime
 
                 if (this.regeneration) {
-                    this.regeneration.gameTick(deltaTime)
+                    const fire = this.regeneration.gameTick(deltaTime)
+
+                    if (fire) this.IsFire = false
                 }
             } else {
                 // 技能LifeTime到期

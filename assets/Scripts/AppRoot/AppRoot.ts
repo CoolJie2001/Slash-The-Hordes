@@ -1,4 +1,4 @@
-import { Camera, Component, director, instantiate, JsonAsset, Prefab, _decorator } from "cc";
+import { Camera, Component, director, instantiate, JsonAsset, Prefab, _decorator, Node } from "cc";
 import { GameSettings } from "../Game/Data/GameSettings";
 import { GameAssets } from "../Game/Data/Assets/GameAssets";
 import { TranslationData } from "../Game/Data/TranslationData";
@@ -22,6 +22,8 @@ export class AppRoot extends Component {
     @property(OpenCloseAnimator) private screenFader: OpenCloseAnimator;
     @property(Y8) private y8: Y8;
 
+    @property(Node) private damageLayer : Node
+
     private static instance: AppRoot;
     private saveSystem: SaveSystem;
 
@@ -32,6 +34,12 @@ export class AppRoot extends Component {
     public static get Instance(): AppRoot {
         return this.instance;
     }
+
+    
+    public get DamageLayer() : Node {
+        return this.damageLayer
+    }
+    
 
     public get AudioPlayer(): AudioPlayer {
         return this.audio;
