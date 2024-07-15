@@ -1,5 +1,7 @@
-import { _decorator, CCFloat, CCInteger, Color, Component, Label, Node, tween, UIOpacity, UITransform, v3, Vec3 } from 'cc';
+import { _decorator, AlphaKey, CCFloat, CCInteger, Color, Component, Label, Node, tween, UIOpacity, UITransform, v3, Vec3 } from 'cc';
 import { AppRoot } from '../../../AppRoot/AppRoot';
+import { Signal } from '../../../Services/EventSystem/Signal';
+import { ISignal } from '../../../Services/EventSystem/ISignal';
 const { ccclass, property } = _decorator;
 
 /**
@@ -26,7 +28,7 @@ export class DamageSkipping extends Component {
      * 跳字动画时间
      */
     @property({ type: CCInteger, displayName: '动画时间(ms)' })
-    displayDuration: number = 3000
+    displayDuration: number = 1500
 
     /**
      * 显示伤害跳字的玩家节点
@@ -38,7 +40,9 @@ export class DamageSkipping extends Component {
      * 伤害跳字的根节点层
      */
     @property(Node)
-    private damageLayer : Node
+    private damageLayer: Node
+
+    private objectDestroy: Signal<DamageSkipping> = new Signal<DamageSkipping>()
 
     /**
      * 获取跳字玩家节点
@@ -96,6 +100,12 @@ export class DamageSkipping extends Component {
         }
     }
 
+
+    public get ObjectDestroy(): ISignal<DamageSkipping> {
+        return this.objectDestroy
+    }
+
+
     /**
      * 初始化飘字组件
      * @param layer 显示飘字的根节点
@@ -103,38 +113,40 @@ export class DamageSkipping extends Component {
      * @param damage 伤害值
      * @param color 飘字颜色
      */
-    public init(layer : Node, playerNode: Node, damage: number, color: Color) {
+    public init(layer: Node, playerNode: Node, damage: number, color: Color) {
         this.damageLayer = layer
         this.DisplayPlayerNode = playerNode
         this.number.string = String(damage)
         this.DisplayColor = color
 
-        if (layer) {
-            this.damageLayer.addChild(this.node)
-        }
+        // if (layer) {
+        //     this.damageLayer.addChild(this.node)
+        // }
     }
 
-    start() {
+    public play() {
         // 确保 number 和 displayPlayer 都已经设置
         if (!this.number || !this.displayPlayer || !this.damageLayer) {
             console.error('Number label or display player node not set.');
             return;
         }
 
+        this.node.active = true
+
         // 将伤害跳字节点设置到 displayPlayer 的位置
-        const worldPosition = this.displayPlayer.position
-        const uiTransform = AppRoot.Instance.MainCamera.node.parent.getComponent(UITransform)
-        const uiPosition = uiTransform.convertToNodeSpaceAR(worldPosition)
+        const worldPosition = this.displayPlayer.getWorldPosition()
+        // const uiTransform = AppRoot.Instance.MainCamera.node.parent.getComponent(UITransform)
+        // const uiPosition = uiTransform.convertToNodeSpaceAR(worldPosition)
 
-        this.node.setPosition(uiPosition);
+        this.node.setWorldPosition(worldPosition);
 
-        console.log(`${this.displayPlayer.name}----${worldPosition}, uipos: ${uiPosition}`)
+        // console.log(`${this.displayPlayer.name}----${worldPosition}, uipos: ${uiPosition}`)
 
-        return
+        // return
 
         // 计算动画目标位置
-        const startPosition = v3(0, 0, 0)
-        const targetPosition = new Vec3(startPosition.x + this.forceIntensity, startPosition.y + this.forceIntensity + 100, startPosition.z);
+        const startPosition = worldPosition
+        const targetPosition = new Vec3(startPosition.x + this.forceIntensity, startPosition.y + this.forceIntensity + 50, startPosition.z);
 
         const opacityNode = this.node.children[0].getComponent(UIOpacity)
 
@@ -154,22 +166,32 @@ export class DamageSkipping extends Component {
         //     .start();
 
         const obj = {
-            p: startPosition
+            p: startPosition,
+            alpha: 255
         }
 
         tween(obj)
-            .to(this.displayDuration / 1000, { p: targetPosition },
+            .to(0.1, { p: targetPosition },
                 {
-                    easing: 'sineOut',
+                    easing: 'sineIn',
                     onUpdate: (target, ratio) => {
-                        this.node.position = obj.p
-
-                        opacityNode.opacity = 255 * (1 - ratio);
+                        this.node.setWorldPosition(obj.p)
                     }
                 })
+            .to(0.5, { alpha: 0 },
+                {
+                    easing: 'sineIn',
+                    onUpdate: (target, ratio) => {
+                        // opacityNode.opacity = 255 * (1 - ratio);
+                        opacityNode.opacity = obj.alpha
+                    }
+                }
+            )
             .call(() => {
-                this.node.parent.removeChild(this.node)
-                this.node.destroy()
+                // this.node.parent.removeChild(this.node)
+                // this.node.destroy()
+
+                this.objectDestroy.trigger(this)
             })
             .start();
     }

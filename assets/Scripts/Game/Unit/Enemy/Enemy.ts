@@ -5,9 +5,7 @@ import { delay } from "../../../Services/Utils/AsyncUtils";
 import { EnemySettings } from "../../Data/GameSettings";
 import { UnitHealth } from "../UnitHealth";
 import { EnemyMovementType } from "./EnemyMovementType";
-import { DamageSkipping } from "../../UI/CharacterDamage/DamageSkipping";
-import { Game } from "../../Game";
-import { AppRoot } from "../../../AppRoot/AppRoot";
+import { SkippingManager } from "../../UI/CharacterDamage/SkippingManager";
 
 const { ccclass, property } = _decorator;
 
@@ -18,7 +16,7 @@ export class Enemy extends Component {
     @property(Material) private defaultMaterial: Material;
     @property(Material) private whiteMaterial: Material;
 
-    @property(Prefab) private damageSkipping : Prefab
+    @property(Prefab) private damageSkipping: Prefab
 
     private deathEvent: Signal<Enemy> = new Signal<Enemy>();
     private lifetimeEndedEvent: Signal<Enemy> = new Signal<Enemy>();
@@ -39,11 +37,11 @@ export class Enemy extends Component {
 
     private endOfLifetimeTriggered = false;
 
-    private knockbackDirection : Vec2 = new Vec2()
-    private knockbackTimeLeft : number = 0
-    private knockbackSpeed : number = 0
+    private knockbackDirection: Vec2 = new Vec2()
+    private knockbackTimeLeft: number = 0
+    private knockbackSpeed: number = 0
 
-    private currentDirection : Vec2 = new Vec2()
+    private currentDirection: Vec2 = new Vec2()
 
     public setup(position: Vec3, settings: EnemySettings): void {
         this.id = settings.id;
@@ -115,16 +113,19 @@ export class Enemy extends Component {
         return this.lifetimeEndedEvent;
     }
 
-    public get CurrentDirection() : Vec2 {
+    public get CurrentDirection(): Vec2 {
         return this.currentDirection
     }
 
     public dealDamage(points: number): void {
         this.health.damage(points);
 
-        let damageNode = instantiate(this.damageSkipping)
-        let skipping = damageNode.getComponent(DamageSkipping)
-        skipping.init(AppRoot.Instance.DamageLayer, this.node, points, Color.RED)
+        // let damageNode = instantiate(this.damageSkipping)
+        // let skipping = damageNode.getComponent(DamageSkipping)
+        // skipping.init(AppRoot.Instance.DamageLayer, this.node, points, Color.RED)
+        const obj = SkippingManager.Instance.createNewObject(this.node, points, Color.RED)
+
+        if (obj) obj.play()
 
         if (!this.health.IsAlive) {
             this.deathEvent.trigger(this);
@@ -176,7 +177,7 @@ export class Enemy extends Component {
      * @param distance 击退的距离
      * @param duration 击退的持续时间
      */
-    public async knockback(direction: Vec2, distance : number, duration : number) : Promise<void> {
+    public async knockback(direction: Vec2, distance: number, duration: number): Promise<void> {
         this.knockbackDirection = direction.normalize()
         this.knockbackSpeed = distance / duration
         this.knockbackTimeLeft = duration

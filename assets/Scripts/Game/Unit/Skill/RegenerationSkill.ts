@@ -43,7 +43,6 @@ export class RegenerationSkill extends BaseSkill {
 
         if (this.player) {
             this.healthUnit = this.player.Health
-            console.log(`${this.node.name}----初始化玩家HealthUnit成功.`)
         }
 
         this.regeneration = new PlayerRegeneration(this.healthUnit)

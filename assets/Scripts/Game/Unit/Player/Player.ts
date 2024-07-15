@@ -12,6 +12,7 @@ import { SkillManager } from "../Skill/SkillManager";
 import { DamageSkipping } from "../../UI/CharacterDamage/DamageSkipping";
 import { DebugNodeUtils } from "../../../Services/Utils/DebugNodeUtils";
 import { AppRoot } from "../../../AppRoot/AppRoot";
+import { SkippingManager } from "../../UI/CharacterDamage/SkippingManager";
 
 const { ccclass, property } = _decorator;
 
@@ -156,9 +157,13 @@ export class Player extends Component {
         await delay(100);
         this.sprite.color = Color.WHITE;
 
-        let damageNode = instantiate(this.damageSkipping)
-        let skipping = damageNode.getComponent(DamageSkipping)
-        skipping.init(AppRoot.Instance.DamageLayer, this.node, hpChange, damageColor)
+        // let damageNode = instantiate(this.damageSkipping)
+        // let skipping = damageNode.getComponent(DamageSkipping)
+        // skipping.init(AppRoot.Instance.DamageLayer, this.node, hpChange, damageColor)
+
+        const obj = SkippingManager.Instance.createNewObject(this.node, hpChange, damageColor)
+
+        if (obj) obj.play()
 
         if (!this.health.IsAlive) {
             this.animation.play("Die");
