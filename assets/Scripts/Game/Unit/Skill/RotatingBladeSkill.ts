@@ -14,10 +14,6 @@ export class RotatingBladeSkill extends BaseSkill {
 
     private elapsedTime: number = 0
 
-    public get RotatingBladeSettings(): RotatingBladeSetting[] {
-        return this.SkillSettings
-    }
-
     start() {
     }
 
@@ -39,16 +35,22 @@ export class RotatingBladeSkill extends BaseSkill {
         }
     }
 
-    update(deltaTime: number) {
-        if (this.elapsedTime < this.LifeTime) {
-            this.elapsedTime += deltaTime
-            const rotationSpeed = 360
-            this.node.angle += rotationSpeed * deltaTime
-        } else {
-            this.node.active = false
-            this.elapsedTime = 0
+    override gameTick(deltaTime: number): void {
+        super.gameTick(deltaTime)
 
-            this.IsFire = false
+        if (this.IsFire) {
+            // 判断释放技能后, 技能的LifeTime是否到期
+            if (this.elapsedTime < this.LifeTime) {
+                this.elapsedTime += deltaTime
+                const rotationSpeed = 360
+                this.node.angle += rotationSpeed * deltaTime
+            } else {
+                this.elapsedTime = 0
+
+                this.node.active = false
+
+                this.IsFire = false
+            }
         }
     }
 }

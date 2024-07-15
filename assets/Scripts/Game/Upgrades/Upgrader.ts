@@ -77,7 +77,8 @@ export class Upgrader {
     }
 
     private upgradeHaloProjectileLauncher(): void {
-        this.haloProjectileLauncher.upgrade();
+        // this.haloProjectileLauncher.upgrade();
+        this.player.SkillManager.upgrade(UpgradeType.HaloProjectlie)
     }
 
     private upgradeRegeneration(): void {

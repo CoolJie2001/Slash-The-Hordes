@@ -14,7 +14,7 @@ export class WeaponCollisionSystem {
         weapon.Collider.ContactBeginEvent.on(this.onWeaponContactBegin, this);
     }
 
-    private angleToDirection(angle : number) : Vec2 {
+    private angleToDirection(angle: number): Vec2 {
         const radian = angle * (Math.PI / 180)
 
         const x = Math.cos(radian)
@@ -28,11 +28,11 @@ export class WeaponCollisionSystem {
 
         if (enemy) {
             if (this.weapon && this.weapon.WeaponNode) {
-                console.log(this.weapon.WeaponNode.angle)
-                
+                // console.log(this.weapon.WeaponNode.angle)
+
                 let dir = this.angleToDirection(this.weapon.WeaponNode.angle)
 
-                let knockbackDir = v2(-dir.x, -dir.y)
+                let knockbackDir = v2(dir.x, dir.y)
 
                 await enemy.knockback(knockbackDir, 25.0, 0.1)
             }

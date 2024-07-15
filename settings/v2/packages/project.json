@@ -64,5 +64,20 @@
   "script": {
     "preserveSymlinks": true
   },
-  "custom_joint_texture_layouts": []
+  "custom_joint_texture_layouts": [],
+  "sorting-layer": {
+    "layers": [
+      {
+        "id": 0,
+        "name": "default",
+        "value": 0
+      },
+      {
+        "id": 1,
+        "name": "粒子效果层",
+        "value": 1
+      }
+    ],
+    "increaseId": 1
+  }
 }

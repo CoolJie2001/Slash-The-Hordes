@@ -39,14 +39,16 @@ export class PlayerRegeneration {
      */
     public upgrade(): void {
         // 这里可以根据配置来决定一次升级恢复能力能在单位时间内恢复多少血量，这里是升一级多恢复1点血量
-        
+
     }
 
     public gameTick(deltaTime: number): void {
         if (this.singleRecoveryHealth <= 0) return;
 
         this.regenerationTimer.gameTick(deltaTime);
+
         if (this.regenerationTimer.tryFinishPeriod()) {
+            // 每秒恢复
             this.health.heal(this.SingleRecoveryHealth);
         }
     }

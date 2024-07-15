@@ -23,6 +23,10 @@ export enum MetaUpgradeType {
  */
 export enum SkillUpgradeType {
     /**
+     * 武器伤害
+     */
+    WeaponDamage = 0,
+    /**
      * 飞行标枪
      */
     HorizontalProjectile = 1,
@@ -59,14 +63,21 @@ export class EnumUtils {
         return Enum(result) as Record<keyof T, number>;
     }
 
-    /**
-     * 获取枚举值在枚举类型中定义的名称字符串
-     * @param enumType 枚举类型
-     * @param value 枚举值
-     * @returns 返回枚举值在枚举类型中定义的名称字符串
-     */
-    public static getEnumName(enumType: any, value : number) : string | undefined {
-        return enumType[value]
+    public static convertUpgradeTypeToSkillUpgradeType(source: UpgradeType): SkillUpgradeType {
+        switch (source) {
+            case UpgradeType.DiagonalProjectile:
+                return SkillUpgradeType.DiagonalProjectile
+            case UpgradeType.HorizontalProjectile:
+                return SkillUpgradeType.HorizontalProjectile
+            case UpgradeType.HaloProjectlie:
+                return SkillUpgradeType.HaloProjectile
+            case UpgradeType.Regeneration:
+                return SkillUpgradeType.Regeneration
+            case UpgradeType.RotatingBlade:
+                return SkillUpgradeType.RotatingBlade
+            case UpgradeType.WeaponDamage:
+                return SkillUpgradeType.WeaponDamage
+        }
     }
 
 

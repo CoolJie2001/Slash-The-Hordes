@@ -1,12 +1,21 @@
-export class RotatingBladeSetting {
+import { SkillLevel } from "../SkillLevel"
+
+export class RotatingBladeSetting implements SkillLevel {
+    public id: string
+    public damage: number
+    public cooldown: number
+    public lifetime: number
+    public level: number
+    public name: string
+    public describe: string
+
     public constructor(
-        private id: string,
-        private damage: number,
-        private cooldown: number,
-        private lifeTime: number,
-        private level: number,
-        private describe: string,
-        private upLevel: string
+        id: string,
+        damage: number,
+        cooldown: number,
+        lifeTime: number,
+        level: number,
+        describe: string
     ) {
         this.id = id
         this.Damage = damage
@@ -14,7 +23,6 @@ export class RotatingBladeSetting {
         this.LifeTime = lifeTime
         this.Level = level
         this.Describe = describe
-        this.UpLevel = upLevel
     }
 
     public get Id(): string {
@@ -38,11 +46,11 @@ export class RotatingBladeSetting {
     }
 
     public get LifeTime(): number {
-        return this.lifeTime
+        return this.lifetime
     }
 
     public set LifeTime(value: number) {
-        this.lifeTime = value
+        this.lifetime = value
     }
 
     public get Level(): number {
@@ -59,13 +67,5 @@ export class RotatingBladeSetting {
 
     public set Describe(value: string) {
         this.describe = value
-    }
-
-    public get UpLevel(): string {
-        return this.upLevel
-    }
-
-    public set UpLevel(value: string) {
-        this.upLevel = value
     }
 }

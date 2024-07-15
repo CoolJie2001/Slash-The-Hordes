@@ -1,4 +1,4 @@
-import { Animation, Node, BoxCollider2D, Collider2D, Component, Vec2, Vec3, _decorator, Details, Sprite, Color, misc, approx } from "cc";
+import { Animation, Node, BoxCollider2D, Collider2D, Component, Vec2, Vec3, _decorator, Details, Sprite, Color, misc, approx, instantiate, Prefab } from "cc";
 import { delay } from "../../../Services/Utils/AsyncUtils";
 import { IInput } from "../../Input/IInput";
 import { UnitHealth } from "../UnitHealth";
@@ -9,6 +9,8 @@ import { PlayerUI } from "./PlayerUI/PlayerUI";
 import { Weapon } from "./Weapon/Weapon";
 import { BaseSkill } from "../Skill/BaseSkill";
 import { SkillManager } from "../Skill/SkillManager";
+import { DamageSkipping } from "../../UI/CharacterDamage/DamageSkipping";
+import { DebugNodeUtils } from "../../../Services/Utils/DebugNodeUtils";
 
 const { ccclass, property } = _decorator;
 
@@ -22,11 +24,13 @@ export class Player extends Component {
     @property(Animation) private animation: Animation;
     @property(Sprite) private sprite: Sprite;
 
+
     /**
      * 玩家当前能够使用的所有技能管理类
      * 把玩家能使用的类都纳入进该类进行管理.
      */
     @property(SkillManager) private skillManager: SkillManager
+    @property(Prefab) private damageSkipping: Prefab
 
     private input: IInput;
     private health: UnitHealth;
@@ -99,7 +103,7 @@ export class Player extends Component {
         this.move(deltaTime);
         this.weapon.gameTick(deltaTime);
         this.magnet.gameTick(deltaTime);
-        this.regeneration.gameTick(deltaTime);
+        // this.regeneration.gameTick(deltaTime);
         this.skillManager.gameTick(deltaTime)
     }
 
@@ -138,14 +142,23 @@ export class Player extends Component {
     }
 
     private async animateHpChange(hpChange: number): Promise<void> {
+        let damageColor = Color.WHITE
+
         if (hpChange < 0) {
             this.sprite.color = Color.RED;
+            damageColor = Color.RED
         } else {
             this.sprite.color = Color.GREEN;
+            damageColor = Color.GREEN
         }
 
         await delay(100);
         this.sprite.color = Color.WHITE;
+
+        let damageNode = instantiate(this.damageSkipping)
+        let skipping = damageNode.getComponent(DamageSkipping)
+        skipping.init(this.node, hpChange, damageColor)
+        this.playerUI.node.addChild(damageNode)
 
         if (!this.health.IsAlive) {
             this.animation.play("Die");
