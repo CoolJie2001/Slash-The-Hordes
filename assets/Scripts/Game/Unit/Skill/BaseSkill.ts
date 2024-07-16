@@ -91,6 +91,13 @@ export class BaseSkill extends Component {
         return this.skillSettings
     }
 
+    public getCurrentSkillSetting(): any | null {
+        if (this.SkillSettings && this.SkillSettings.length >= this.CurrentLevel)
+            return this.SkillSettings[this.CurrentLevel - 1]
+
+        return null
+    }
+
     public setup(skillSetting: SkillLevel[]) {
         this.skillSettings = skillSetting
 

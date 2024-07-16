@@ -1,4 +1,4 @@
-import { Animation, AnimationState, CCFloat, Component, Node, _decorator, v3 } from "cc";
+import { Animation, AnimationState, CCFloat, CCInteger, Component, Node, _decorator, v3 } from "cc";
 import { ISignal } from "../../../../Services/EventSystem/ISignal";
 import { Signal } from "../../../../Services/EventSystem/Signal";
 import { GameTimer } from "../../../../Services/GameTimer";
@@ -7,6 +7,7 @@ import { UpgradableCollider } from "./UpgradableCollider";
 import { Player } from "../Player";
 import { SkillManager } from "../../Skill/SkillManager";
 import { UpgradeType } from "../../../Upgrades/UpgradeType";
+import { WeaponDamageSkill } from "../../Skill/WeaponDamageSkill";
 
 const { ccclass, property } = _decorator;
 
@@ -21,6 +22,9 @@ export class Weapon extends Component {
     @property(CCFloat)
     private offsetDistance: number = 40
 
+    @property(CCInteger)
+    private weaponId: Number = 0
+
     private weaponStrikeEvent = new Signal<Weapon>();
 
     private strikeTimer: GameTimer;
@@ -28,12 +32,11 @@ export class Weapon extends Component {
     private batter: number;
     private damage: number;
 
-    private currentWeaponLevel: number = 1
-
     private player: Player;
 
     private strikeQueue: Promise<void> = Promise.resolve()
 
+    private weaponDamageSetting: any
 
     public init(strikeDelay: number, damage: number, batter: number, player: Player): void {
         this.strikeTimer = new GameTimer(strikeDelay);
@@ -48,6 +51,8 @@ export class Weapon extends Component {
         this.upgradableCollider.init();
 
         this.player = player;
+
+        this.weaponDamageSetting = SkillManager.Instance.getSkillSetting(String(this.weaponId))
     }
 
     public gameTick(deltaTime: number): void {
@@ -88,6 +93,8 @@ export class Weapon extends Component {
 
     public upgradeWeaponDamage(): void {
         SkillManager.Instance.upgrade(UpgradeType.WeaponDamage)
+
+
 
         this.damage++;
     }

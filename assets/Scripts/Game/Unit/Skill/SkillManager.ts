@@ -38,6 +38,18 @@ export class SkillManager extends Component {
             SkillManager.instance = null
     }
 
+    public getSkillSetting(id: string): any {
+        if (this.skills.has(id)) {
+            const skill = this.skills.get(id)
+
+            if (skill) {
+                return skill.getCurrentSkillSetting()
+            }
+        }
+
+        return null
+    }
+
     start() {
         this.skills.clear()
         this.loadSkills('skills')
@@ -102,7 +114,7 @@ export class SkillManager extends Component {
                 if (skillPrefab) {
                     this.node.addChild(skillPrefab)
 
-                    DebugNodeUtils.DebugOutputNode('', this.node)
+                    // DebugNodeUtils.DebugOutputNode('', this.node)
 
                     skill = skillPrefab.getComponent(BaseSkill)
 
