@@ -21,10 +21,6 @@ export class WeaponDamageSkill extends BaseSkill {
         this.currentSetting.strikeDelay = duration
     }
 
-    override upgrade(): void {
-        const setting = this.getCurrentSkillSetting()
-    }
-
     public override getCurrentSkillSetting(): WeaponSettings {
         const option = super.getCurrentSkillSetting()
 

@@ -57,8 +57,6 @@ export class Game extends Component {
     @property(GameAudioAdapter) private gameAudioAdapter: GameAudioAdapter;
     @property(Node) private blackScreen: Node;
 
-    @property(SkillManager) private skillManager: SkillManager
-
     private playerCollisionSystem: PlayerCollisionSystem;
     private haloProjectileLauncher: HaloProjectileLauncher;
     private horizontalProjectileLauncher: WaveProjectileLauncher;
@@ -133,7 +131,7 @@ export class Game extends Component {
         this.enemyMagicOrbProjectileLauncher.gameTick(deltaTime);
         // this.rotatingBladeLauncher.gameTick(deltaTime)
 
-        this.skillManager.gameTick(deltaTime)
+        SkillManager.Instance.gameTick(deltaTime)
 
         this.itemAttractor.gameTick(deltaTime);
         this.background.gameTick();
@@ -220,7 +218,7 @@ export class Game extends Component {
             this.horizontalProjectileLauncher,
             this.haloProjectileLauncher,
             this.diagonalProjectileLauncher,
-            this.skillManager,
+            SkillManager.Instance,
             settings.upgrades
         );
         const modalLauncher = new GameModalLauncher(AppRoot.Instance.ModalWindowManager, this.player, this.gamePauser, upgrader, translationData);

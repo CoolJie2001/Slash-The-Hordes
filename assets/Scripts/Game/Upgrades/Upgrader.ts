@@ -78,12 +78,13 @@ export class Upgrader {
 
     private upgradeHaloProjectileLauncher(): void {
         // this.haloProjectileLauncher.upgrade();
-        this.player.SkillManager.upgrade(UpgradeType.HaloProjectlie)
+        SkillManager.Instance.upgrade(UpgradeType.HaloProjectlie)
     }
 
     private upgradeRegeneration(): void {
         // this.player.Regeneration.upgrade();
-        this.player.SkillManager.upgrade(UpgradeType.Regeneration)
+
+        SkillManager.Instance.upgrade(UpgradeType.Regeneration)
     }
 
     private upgradeRotatingBladeLauncher(): void {

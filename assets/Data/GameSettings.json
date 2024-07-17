@@ -28,7 +28,7 @@
     "weapon": {
       "strikeDelay": 2,
       "damage": 2,
-      "batter": 2
+      "batter": 1
     },
     "haloLauncher": {
       "projectilesToSpawn": 20,

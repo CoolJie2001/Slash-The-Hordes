@@ -28,9 +28,12 @@ export class SkillManager extends Component {
         return SkillManager.instance
     }
 
-    onLoad() {
+    protected onLoad(): void {
         if (SkillManager.instance == null)
             SkillManager.instance = this
+
+        this.skills.clear()
+        this.loadSkills('skills')
     }
 
     protected onDestroy(): void {
@@ -48,11 +51,6 @@ export class SkillManager extends Component {
         }
 
         return null
-    }
-
-    start() {
-        this.skills.clear()
-        this.loadSkills('skills')
     }
 
     /**
@@ -98,7 +96,7 @@ export class SkillManager extends Component {
         }
     }
 
-    createSkill(skillSetting: any[]): BaseSkill | null {
+    private createSkill(skillSetting: any[]): BaseSkill | null {
         const data = skillSetting[0]
 
         let skill: BaseSkill = null

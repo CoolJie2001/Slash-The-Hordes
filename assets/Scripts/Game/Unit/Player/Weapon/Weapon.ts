@@ -42,6 +42,7 @@ export class Weapon extends Component {
         this.strikeTimer = new GameTimer(strikeDelay);
         this.damage = damage;
         this.batter = batter;
+
         this.node.active = false;
 
         this.weaponAnimation.on(Animation.EventType.FINISHED, this.endStrike, this);
@@ -51,8 +52,6 @@ export class Weapon extends Component {
         this.upgradableCollider.init();
 
         this.player = player;
-
-        this.weaponDamageSetting = SkillManager.Instance.getSkillSetting(String(this.weaponId))
     }
 
     public gameTick(deltaTime: number): void {
@@ -91,12 +90,18 @@ export class Weapon extends Component {
         return this.weaponNode
     }
 
+    private applyCurrentWeaponSetting() {
+        this.weaponDamageSetting = SkillManager.Instance.getSkillSetting(String(this.weaponId))
+
+        this.damage = this.weaponDamageSetting.damage;
+        this.batter = Number(this.weaponDamageSetting.batter)
+        this.strikeTimer = new GameTimer(Number(this.weaponDamageSetting.strikeDelay));
+    }
+
     public upgradeWeaponDamage(): void {
         SkillManager.Instance.upgrade(UpgradeType.WeaponDamage)
 
-
-
-        this.damage++;
+        this.applyCurrentWeaponSetting()
     }
 
     public upgradeWeaponLength(): void {

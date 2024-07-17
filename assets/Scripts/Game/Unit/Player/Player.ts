@@ -13,6 +13,7 @@ import { DamageSkipping } from "../../UI/CharacterDamage/DamageSkipping";
 import { DebugNodeUtils } from "../../../Services/Utils/DebugNodeUtils";
 import { AppRoot } from "../../../AppRoot/AppRoot";
 import { SkippingManager } from "../../UI/CharacterDamage/SkippingManager";
+import { UpgradeType } from "../../Upgrades/UpgradeType";
 
 const { ccclass, property } = _decorator;
 
@@ -25,14 +26,6 @@ export class Player extends Component {
     @property(Node) private playerGraphics: Node;
     @property(Animation) private animation: Animation;
     @property(Sprite) private sprite: Sprite;
-
-
-    /**
-     * 玩家当前能够使用的所有技能管理类
-     * 把玩家能使用的类都纳入进该类进行管理.
-     */
-    @property(SkillManager) private skillManager: SkillManager
-    @property(Prefab) private damageSkipping: Prefab
 
     private input: IInput;
     private health: UnitHealth;
@@ -86,10 +79,6 @@ export class Player extends Component {
         return this.dir;
     }
 
-    public get SkillManager(): SkillManager {
-        return this.skillManager
-    }
-
     public get CurrentForward(): number {
         if (this.dir) {
             let angleRadians = Math.atan2(this.dir.y, this.dir.x);
@@ -101,12 +90,17 @@ export class Player extends Component {
         return 0
     }
 
+    protected start(): void {
+        console.log('Player.start()')
+
+        SkillManager.Instance.upgrade(UpgradeType.WeaponDamage)
+    }
+
     public gameTick(deltaTime: number): void {
         this.move(deltaTime);
         this.weapon.gameTick(deltaTime);
         this.magnet.gameTick(deltaTime);
         // this.regeneration.gameTick(deltaTime);
-        this.skillManager.gameTick(deltaTime)
     }
 
     private move(deltaTime: number): void {

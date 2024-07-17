@@ -1,4 +1,4 @@
-id,damage,batter,level,describe,name,collisionDelay,speed,regenerationDelay
-0,2,1,1,加长武器的攻击长度,武器长度,0.5,100,5
-0,4,1,2,攻击力增加100%,武器长度,0.5,100,5
-0,8,2,3,攻击力增加100%,武器长度,0.5,100,5
+id,damage,cooldown,batter,level,describe,name,collisionDelay,speed,regenerationDelay
+0,3,1,1,1,提升武器的基础攻击力,基础伤害,0.5,100,5
+0,4.5,1,1,2,攻击力增加50%,基础伤害,0.5,100,5
+0,9,1,2,3,攻击力增加100%,基础伤害,0.5,100,5
