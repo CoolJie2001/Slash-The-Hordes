@@ -1,0 +1,62 @@
+@startuml ProjectileLauncher
+skinparam dpi 300
+
+abstract class DelayedEnemySpawner {
+    +gameTick(deltaTime : number)
+    +abstract delayedGameTick(deltaTime : number)
+}
+
+class WaveEnemySpawner {
+    -enemiesPerWave: number
+    -enemyId: string
+    -spawnTimer: GameTimer
+    +delayedGameTick(deltaTime : number)
+}
+
+class IndividualEnemySpawner {
+    -spawnTimer : GameTimer
+    -enemyId : string
+    +delayedGameTick(deltaTime : number)
+}
+
+class CircularEnemySpawner {
+    -spawnTimer : GameTimer
+    -enemyId : string
+    -enemiesToSpawn : number
+    +delayedGameTick(deltaTime : number)
+}
+
+class EnemySpawner {
+    -enemies : Prefab[]
+    -enemyGraphicsTypeToPool : Map<EnemyGraphicsType, ObjectPool<Enemy>>
+    -targetNode : Node
+    -idToSettings : Map<string, EnemySettings>
+
+    +init(targetNode: Node, enemiesSettings: EnemySettings[])
+    +Enemy spawnNewEnemy(positionX: number, positionY: number, id: string)
+    +returnEnemy(enemy: Enemy)
+}
+
+enum EnemyMovementType {
+    Follow,
+    PeriodicFollow,
+    Launch
+}
+
+class EnemyManager {
+    -enemySpawner : EnemySpawner
+    -movementTypeToMover: Map<EnemyMovementType, IEnemyMover>
+    -spawners : DelayedEnemySpawner[]
+    +init(targetNode: Node, settings: EnemyManagerSettings)
+    +gameTick(deltaTime: number)
+}
+
+
+DelayedEnemySpawner <|-- WaveEnemySpawner
+DelayedEnemySpawner <|-- IndividualEnemySpawner
+DelayedEnemySpawner <|-- CircularEnemySpawner
+
+Component <|-- EnemySpawner
+Component <|-- EnemyManager
+
+@enduml
